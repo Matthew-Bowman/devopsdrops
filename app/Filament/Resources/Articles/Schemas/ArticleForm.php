@@ -29,7 +29,8 @@ class ArticleForm
 
 	        FileUpload::make('cover_image'),
 
-	        DateTimePicker::make('published_at'),
+	        DateTimePicker::make('published_at')
+				->required(),
 	    ]);
     }
 }

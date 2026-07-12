@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
+@extends('layouts.app')
+
 @section('title', $article->title)
+
+@section('description', Str::limit(strip_tags($article->content), 155))
 
 @section('content')
 
@@ -21,7 +25,7 @@
 >
 @endif
 
-<div class="prose prose-invert max-w-none">
+<div class="article-content max-w-none">
     {!! $article->content !!}
 </div>
 
