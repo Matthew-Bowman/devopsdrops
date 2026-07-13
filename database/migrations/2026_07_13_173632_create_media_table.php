@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
+
+            $table->string('title');
+            $table->string('path');
+
+            $table->string('alt_text')->nullable();
+
+            $table->string('source')->nullable();
+            $table->string('photographer')->nullable();
+
+            $table->json('tags')->nullable();
+
             $table->timestamps();
         });
     }

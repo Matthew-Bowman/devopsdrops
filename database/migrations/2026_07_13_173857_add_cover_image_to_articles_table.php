@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('article', function (Blueprint $table) {
-            //
+        Schema::table('articles', function (Blueprint $table) {
+            $table->foreignId('cover_image_id')
+                ->nullable()
+                ->constrained('media')
+                ->nullOnDelete();
         });
     }
 
