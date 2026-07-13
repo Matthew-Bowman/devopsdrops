@@ -1,12 +1,23 @@
 @extends('layouts.app')
 
-@extends('layouts.app')
-
 @section('title', $article->title)
 
 @section('description', Str::limit(strip_tags($article->content), 155))
 
 @section('content')
+
+<script type="application/ld+json">
+{
+ "@@context": "https://schema.org",
+ "@@type": "TechArticle",
+ "headline": "{{ $article->title }}",
+ "datePublished": "{{ $article->published_at }}",
+ "author": {
+   "@type": "Person",
+   "name": "DevOps Drops"
+ }
+}
+</script>
 
 <article>
 

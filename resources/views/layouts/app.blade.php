@@ -72,7 +72,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Umami Analytics -->
-    <script defer src="https://umami.matthewbowman.uk/script.js" data-website-id="9f831009-776a-4559-921f-143fca4220ec"></script>
+    <script defer src="https://umami.devopsdrops.uk/script.js" data-website-id="9f831009-776a-4559-921f-143fca4220ec"></script>
 </head>
 
 <body class="bg-gray-950 text-gray-100 font-[Poppins]">
