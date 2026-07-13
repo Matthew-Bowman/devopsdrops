@@ -1,17 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArticleController;
+
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
+
 use App\Models\Article;
 
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', [ArticleController::class, 'index'])
-    ->name('articles.index');
+
+Route::get('/', [HomeController::class, 'index'])
+    ->name('home');
 
 // Articles
 Route::get('/articles', [ArticleController::class, 'index'])

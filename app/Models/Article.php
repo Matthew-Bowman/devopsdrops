@@ -22,4 +22,11 @@ class Article extends Model
     {
         return $this->belongsTo(Media::class, 'cover_image_id');
     }
+
+    public function getReadingTimeAttribute(): int
+    {
+        $words = str_word_count(strip_tags($this->content));
+
+        return max(1, ceil($words / 200));
+    }
 }

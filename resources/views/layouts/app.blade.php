@@ -5,14 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('title', 'DevOps Drops')</title>
+    <title>@yield('title', config('app.name'))</title>
 
     <meta name="description" content="@yield('description', 'DevOps tutorials, guides and infrastructure articles.')">
 
-    <meta property="og:title" content="@yield('title', 'DevOps Drops')">
-    <meta property="og:description" content="@yield('description', 'DevOps tutorials, guides and infrastructure articles.')">
-    <meta property="og:type" content="website">
+    <title>@yield('title', config('app.name'))</title>
+
+    <meta name="description" content="@yield('description', 'DevOps guides, tutorials, and infrastructure articles.')">
+
+    <meta property="og:title" content="@yield('og_title', config('app.name'))">
+    <meta property="og:description" content="@yield('og_description', 'DevOps guides, tutorials, and infrastructure articles.')">
+    <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="@yield('og_image', asset('images/default-og.png'))">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('og_title', config('app.name'))">
+    <meta name="twitter:description" content="@yield('og_description', 'DevOps guides, tutorials, and infrastructure articles.')">
+    <meta name="twitter:image" content="@yield('og_image', asset('images/default-og.png'))">
+
+    <meta property="article:published_time" content="@yield('published_time')">
 
     <!-- Tailwind Import -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -80,7 +92,7 @@
     <header class="border-b border-gray-800 p-6">
         <div class="max-w-5xl mx-auto">
             <a href="/" class="text-2xl font-bold">
-                DevOps Drops
+                {{ config('app.name') }}
             </a>
         </div>
     </header>
@@ -91,7 +103,7 @@
 
     <footer class="border-t border-gray-800 p-6 mt-10">
         <div class="max-w-5xl mx-auto text-gray-400">
-            © {{ date('Y') }} DevOps Drops
+            © {{ date('Y') }} {{ config('app.name') }}
         </div>
     </footer>
 
