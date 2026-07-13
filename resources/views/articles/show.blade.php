@@ -29,6 +29,10 @@
         {{ $article->title }}
     </h1>
 
+    <p class="text-xl text-gray-400 leading-relaxed max-w-3xl mb-6">
+        {{ $article->excerpt }}
+    </p>
+
     <p class="text-gray-400 mb-8">
         Published {{ $article->published_at->format('d M Y') }} · {{ $article->reading_time }} min read
     </p>

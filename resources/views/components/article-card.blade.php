@@ -1,27 +1,23 @@
-<article class="group flex flex-col bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-blue-500 transition duration-300">
+<article class="group relative flex flex-col bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-blue-500 transition duration-300">
 
     @if($article->coverImage)
-    <a href="{{ route('articles.show', $article) }}">
+    <div>
         <img
             src="{{ Storage::url($article->coverImage->path) }}"
             alt="{{ $article->coverImage->alt_text ?? $article->title }}"
             class="w-full aspect-video object-cover group-hover:scale-105 transition duration-300">
-    </a>
+    </div>
     @endif
 
     <div class="p-6 grow flex flex-col">
 
         <h2 class="text-2xl font-bold mb-3">
-            <a
-                href="{{ route('articles.show', $article) }}"
-                class="hover:text-blue-400 transition">
-                {{ $article->title }}
-            </a>
+            {{ $article->title }}
         </h2>
 
         <div class="flex flex-wrap gap-2 mb-4">
             @foreach($article->tags as $tag)
-            <x-tag class="text-xs px-2 py-1 border border-gray-700">
+            <x-tag class="text-xs px-2 py-1 border border-gray-700 relative z-10">
                 {{ $tag->name }}
             </x-tag>
             @endforeach
@@ -31,18 +27,42 @@
             {{ $article->excerpt }}
         </p>
 
-        <div class="flex items-center justify-between text-sm text-gray-500 mt-auto">
+        <div class="mt-auto">
 
-            <span>
-                {{ $article->published_at->format('d M Y') }}
+            <span class="inline-flex items-center gap-2 text-blue-400 font-medium group-hover:text-blue-300 transition mb-5">
+                Read article
+                <svg
+                    class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
             </span>
 
-            <span>
-                {{ $article->reading_time }} min read
-            </span>
+            <div class="flex items-center justify-between text-sm text-gray-500">
+                <span>
+                    {{ $article->published_at->format('d M Y') }}
+                </span>
+
+                <span>
+                    {{ $article->reading_time }} min read
+                </span>
+            </div>
 
         </div>
 
     </div>
+
+    {{-- Makes the entire card clickable --}}
+    <a
+        href="{{ route('articles.show', $article) }}"
+        class="absolute inset-0 z-0"
+        aria-label="Read {{ $article->title }}">
+    </a>
 
 </article>
