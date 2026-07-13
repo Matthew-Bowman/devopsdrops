@@ -18,7 +18,7 @@
         "datePublished": "{{ $article->published_at }}",
         "author": {
             "@type": "Person",
-            "name": "DevOps Drops"
+            "name": "{{ config('app.name') }}"
         }
     }
 </script>
@@ -32,6 +32,18 @@
     <p class="text-gray-400 mb-8">
         Published {{ $article->published_at->format('d M Y') }} · {{ $article->reading_time }} min read
     </p>
+
+    <div class="flex flex-wrap gap-2 mb-4">
+
+        @foreach($article->tags as $tag)
+
+        <x-tag>
+            {{ $tag->name }}
+        </x-tag>
+
+        @endforeach
+
+    </div>
 
     <img style="aspect-ratio: 16/9; object-fit: cover;" src="{{ Storage::url($article->coverImage->path) }}" alt="{{ $article->coverImage->alt_text }}">
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "Articles - config('app.name')")
+@section('title', "Articles - " . config('app.name'))
 
 @section('content')
 
@@ -42,6 +42,18 @@
                         {{ $article->title }}
                     </a>
                 </h2>
+
+                <div class="flex flex-wrap gap-2 mb-4">
+
+                    @foreach($article->tags as $tag)
+
+                    <x-tag class="text-xs px-2 py-1 border border-gray-700">
+                        {{ $tag->name }}
+                    </x-tag>
+
+                    @endforeach
+
+                </div>
 
 
                 <p class="text-gray-400 mb-5 line-clamp-3">

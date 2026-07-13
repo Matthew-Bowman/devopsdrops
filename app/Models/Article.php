@@ -29,4 +29,9 @@ class Article extends Model
 
         return max(1, ceil($words / 200));
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

@@ -38,19 +38,33 @@
 
             @foreach($articles as $article)
 
-            <article class="bg-gray-900 rounded-xl overflow-hidden">
+            <a href="{{ route('articles.show', $article) }}"
+                class="group block bg-gray-900 rounded-xl overflow-hidden hover:border-blue-500 border border-gray-800 transition">
 
                 @if($article->coverImage)
                 <img
                     src="{{ Storage::url($article->coverImage->path) }}"
-                    class="aspect-video object-cover w-full">
+                    alt="{{ $article->title }}"
+                    class="aspect-video object-cover w-full group-hover:scale-105 transition duration-300">
                 @endif
 
                 <div class="p-6">
 
-                    <h3 class="text-xl font-bold mb-3">
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-blue-400 transition">
                         {{ $article->title }}
                     </h3>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+
+                        @foreach($article->tags as $tag)
+
+                        <span class="text-xs bg-gray-800 px-2 py-1 rounded-md border border-gray-700">
+                            {{ $tag->name }}
+                        </span>
+
+                        @endforeach
+
+                    </div>
 
                     <p class="text-gray-400">
                         {{ $article->excerpt }}
@@ -58,7 +72,7 @@
 
                 </div>
 
-            </article>
+            </a>
 
             @endforeach
 
@@ -76,11 +90,11 @@
 
         <div class="flex flex-wrap gap-4">
 
-            @foreach(['Linux','Docker','Kubernetes','Cloud','CI/CD','Networking'] as $topic)
+            @foreach($topics as $topic)
 
-            <span class="bg-gray-800 px-5 py-2 rounded-full">
-                {{ $topic }}
-            </span>
+            <x-tag class="px-5 py-2">
+                {{ $topic->name }}
+            </x-tag>
 
             @endforeach
 

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Article;
 
 class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::whereNotNull('published_at')
+        $articles = Article::with(['coverImage', 'tags'])
+            ->whereNotNull('published_at')
             ->latest('published_at')
             ->get();
 
@@ -18,6 +18,8 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
+        $article->load(['coverImage', 'tags']);
+
         return view('articles.show', compact('article'));
     }
 }
