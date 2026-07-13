@@ -8,29 +8,33 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Select;
 
 class ArticleForm
 {
-    public static function configure(Schema $schema): Schema
-    {
-        return $schema
-	    ->components([
-	        TextInput::make('title')
-        	    ->required(),
+	public static function configure(Schema $schema): Schema
+	{
+		return $schema
+			->components([
+				TextInput::make('title')
+					->required(),
 
-	        TextInput::make('slug')
-	            ->required()
-	            ->unique(ignoreRecord: true),
+				TextInput::make('slug')
+					->required()
+					->unique(ignoreRecord: true),
 
-	        Textarea::make('excerpt'),
+				Textarea::make('excerpt'),
 
-	        RichEditor::make('content')
-	            ->required(),
+				RichEditor::make('content')
+					->required(),
 
-	        FileUpload::make('cover_image'),
+				Select::make('cover_image_id')
+					->relationship('coverImage', 'title')
+					->searchable()
+					->preload(),
 
-	        DateTimePicker::make('published_at')
-				->required(),
-	    ]);
-    }
+				DateTimePicker::make('published_at')
+					->required(),
+			]);
+	}
 }
