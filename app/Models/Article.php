@@ -17,4 +17,9 @@ class Article extends Model
     protected $casts = [
         'published_at' => 'datetime',
     ];
+
+    public function coverImage()
+    {
+        return $this->belongsTo(Media::class, 'cover_image_id');
+    }
 }
