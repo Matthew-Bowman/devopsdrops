@@ -13,8 +13,6 @@ class TagForm
             ->components([
                 TextInput::make('name')
                     ->required(),
-                TextInput::make('slug')
-                    ->required(),
             ]);
     }
 }

@@ -26,6 +26,10 @@ class TagsTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('articles_count')
+                    ->label('Articles')
+                    ->counts('articles')
+                    ->sortable(),
             ])
             ->filters([
                 //
