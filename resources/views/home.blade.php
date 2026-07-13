@@ -37,43 +37,7 @@
         <div class="grid md:grid-cols-3 gap-8">
 
             @foreach($articles as $article)
-
-            <a href="{{ route('articles.show', $article) }}"
-                class="group block bg-gray-900 rounded-xl overflow-hidden hover:border-blue-500 border border-gray-800 transition">
-
-                @if($article->coverImage)
-                <img
-                    src="{{ Storage::url($article->coverImage->path) }}"
-                    alt="{{ $article->title }}"
-                    class="aspect-video object-cover w-full group-hover:scale-105 transition duration-300">
-                @endif
-
-                <div class="p-6">
-
-                    <h3 class="text-xl font-bold mb-3 group-hover:text-blue-400 transition">
-                        {{ $article->title }}
-                    </h3>
-
-                    <div class="flex flex-wrap gap-2 mb-4">
-
-                        @foreach($article->tags as $tag)
-
-                        <span class="text-xs bg-gray-800 px-2 py-1 rounded-md border border-gray-700">
-                            {{ $tag->name }}
-                        </span>
-
-                        @endforeach
-
-                    </div>
-
-                    <p class="text-gray-400">
-                        {{ $article->excerpt }}
-                    </p>
-
-                </div>
-
-            </a>
-
+            <x-article-card :article="$article" />
             @endforeach
 
         </div>

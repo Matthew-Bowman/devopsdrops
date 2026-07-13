@@ -20,63 +20,7 @@
     <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 
         @foreach($articles as $article)
-
-        <article class="group bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-blue-500 transition duration-300">
-
-            @if($article->coverImage)
-            <a href="{{ route('articles.show', $article) }}">
-                <img
-                    src="{{ Storage::url($article->coverImage->path) }}"
-                    alt="{{ $article->coverImage->alt_text ?? $article->title }}"
-                    class="w-full aspect-video object-cover group-hover:scale-105 transition duration-300">
-            </a>
-            @endif
-
-
-            <div class="p-6">
-
-                <h2 class="text-2xl font-bold mb-3">
-                    <a
-                        href="{{ route('articles.show', $article) }}"
-                        class="hover:text-blue-400 transition">
-                        {{ $article->title }}
-                    </a>
-                </h2>
-
-                <div class="flex flex-wrap gap-2 mb-4">
-
-                    @foreach($article->tags as $tag)
-
-                    <x-tag class="text-xs px-2 py-1 border border-gray-700">
-                        {{ $tag->name }}
-                    </x-tag>
-
-                    @endforeach
-
-                </div>
-
-
-                <p class="text-gray-400 mb-5 line-clamp-3">
-                    {{ $article->excerpt }}
-                </p>
-
-
-                <div class="flex items-center justify-between text-sm text-gray-500">
-
-                    <span>
-                        {{ $article->published_at->format('d M Y') }}
-                    </span>
-
-                    <span>
-                        {{ $article->reading_time }} min read
-                    </span>
-
-                </div>
-
-            </div>
-
-        </article>
-
+        <x-article-card :article="$article" />
         @endforeach
 
     </div>
