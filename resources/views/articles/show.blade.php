@@ -111,6 +111,36 @@
         {!! $article->content !!}
     </div>
 
+    @if($relatedArticles->count())
+
+    <section class="mt-20 border-t border-gray-800 pt-12">
+
+        <div class="rounded-xl bg-gray-900/40 border border-gray-800 p-8">
+
+            <h2 class="text-3xl font-bold mb-2">
+                Related Articles
+            </h2>
+
+            <p class="text-gray-400 mb-8">
+                Continue exploring similar topics and guides.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-8">
+
+                @foreach($relatedArticles as $relatedArticle)
+
+                <x-article-card :article="$relatedArticle" />
+
+                @endforeach
+
+            </div>
+
+        </div>
+
+    </section>
+
+    @endif
+
 </article>
 
 @endsection
