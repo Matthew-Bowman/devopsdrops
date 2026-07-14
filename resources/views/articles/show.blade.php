@@ -107,6 +107,32 @@
         {{ $article->title }}
     </h1>
 
+    @can('update', $article)
+
+    <div class="mb-6">
+
+        <a href="{{ route('filament.admin.resources.articles.edit', $article) }}"
+            class="
+                inline-flex
+                items-center
+                rounded-lg
+                border
+                border-gray-700
+                bg-gray-900
+                px-4
+                py-2
+                text-sm
+                text-gray-300
+                hover:text-white
+                hover:border-gray-500
+                transition">
+            Edit Article
+        </a>
+
+    </div>
+
+    @endcan
+
     <p class="text-xl text-gray-400 leading-relaxed max-w-3xl mb-6">
         {{ $article->excerpt }}
     </p>
