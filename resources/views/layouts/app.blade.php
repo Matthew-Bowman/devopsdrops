@@ -29,6 +29,9 @@
     <!-- Tailwind Import -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Site JS -->
+    @vite(['resources/js/app.js'])
+
     <!-- Article Styling -->
     <style>
         .article-content h2 {
@@ -61,18 +64,27 @@
             margin-bottom: .5rem;
         }
 
-        .article-content code {
+        /* Inline code */
+        .article-content :not(pre)>code {
             background: #1f2937;
             padding: .2rem .4rem;
             border-radius: .25rem;
+            font-size: .9em;
         }
 
-        .article-content pre {
+        /* Prism code blocks */
+        .article-content pre[class*="language-"] {
             background: #111827;
-            padding: 1rem;
             border-radius: .5rem;
             overflow-x: auto;
             margin: 1rem 0;
+        }
+
+        /* Reset inline styles only for block code */
+        .article-content pre code {
+            background: transparent;
+            border-radius: 0;
+            font-size: inherit;
         }
     </style>
 
