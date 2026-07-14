@@ -35,14 +35,32 @@ Route::get('/search', [SearchController::class, 'index'])
 // Sitemap
 Route::get('/sitemap.xml', function () {
 
-    return Sitemap::create()
-        ->add(Url::create('/'))
-        ->add(Url::create('/articles'))
+    $sitemap = Sitemap::create()
         ->add(
-            Article::all()->map(
-                fn($article) =>
-                Url::create("/articles/{$article->slug}")
-            )
+            Url::create('/')
+                ->setLastModificationDate(now())
         )
-        ->toResponse(request());
+        ->add(
+            Url::create('/articles')
+                ->setLastModificationDate(
+                    \Carbon\Carbon::parse(Article::max('updated_at'))
+                )
+        )->add(
+            Url::create('/search')
+                ->setLastModificationDate(now())
+        );
+
+    Article::query()
+        ->whereNotNull('published_at')
+        ->each(function ($article) use ($sitemap) {
+
+            $sitemap->add(
+                Url::create("/articles/{$article->slug}")
+                    ->setLastModificationDate(
+                        \Carbon\Carbon::parse(Article::max('updated_at'))
+                    )
+            );
+        });
+
+    return $sitemap->toResponse(request());
 });

@@ -11,16 +11,18 @@ class SearchController extends Controller
     {
         $query = $request->input('q');
 
-        $articles = collect();
-
-        if ($query) {
-            $articles = Article::search($query)
-                ->get();
+        if (!$query) {
+            return view('search.search', [
+                'query' => null,
+                'articles' => collect(),
+            ]);
         }
 
+        $articles = Article::search($query)->get();
+
         return view('search.search', [
-            'articles' => $articles,
             'query' => $query,
+            'articles' => $articles,
         ]);
     }
 }
