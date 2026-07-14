@@ -32,4 +32,13 @@ import 'prismjs/components/prism-yaml';
 import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-sql';
 
+
+const mobileMenuButton = document.querySelector('#mobile-menu-button');
+const mobileMenu = document.querySelector('#mobile-menu');
+
+mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+});
+
+
 Prism.highlightAll();

@@ -10,6 +10,62 @@
 
 @section('content')
 
+<!-- Article Styling -->
+<style>
+    .article-content h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .article-content h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .article-content p {
+        margin-bottom: 1rem;
+        line-height: 1.8;
+        color: #d1d5db;
+    }
+
+    .article-content ul,
+    .article-content ol {
+        margin: 1rem 0;
+        padding-left: 2rem;
+    }
+
+    .article-content li {
+        margin-bottom: .5rem;
+    }
+
+    /* Inline code */
+    .article-content :not(pre)>code {
+        background: #1f2937;
+        padding: .2rem .4rem;
+        border-radius: .25rem;
+        font-size: .9em;
+    }
+
+    /* Prism code blocks */
+    .article-content pre[class*="language-"] {
+        background: #111827;
+        border-radius: .5rem;
+        overflow-x: auto;
+        margin: 1rem 0;
+    }
+
+    /* Reset inline styles only for block code */
+    .article-content pre code {
+        background: transparent;
+        border-radius: 0;
+        font-size: inherit;
+    }
+</style>
+
 <script type="application/ld+json">
     {
         "@@context": "https://schema.org",

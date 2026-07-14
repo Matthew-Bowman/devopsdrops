@@ -32,62 +32,6 @@
     <!-- Site JS -->
     @vite(['resources/js/app.js'])
 
-    <!-- Article Styling -->
-    <style>
-        .article-content h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .article-content h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .article-content p {
-            margin-bottom: 1rem;
-            line-height: 1.8;
-            color: #d1d5db;
-        }
-
-        .article-content ul,
-        .article-content ol {
-            margin: 1rem 0;
-            padding-left: 2rem;
-        }
-
-        .article-content li {
-            margin-bottom: .5rem;
-        }
-
-        /* Inline code */
-        .article-content :not(pre)>code {
-            background: #1f2937;
-            padding: .2rem .4rem;
-            border-radius: .25rem;
-            font-size: .9em;
-        }
-
-        /* Prism code blocks */
-        .article-content pre[class*="language-"] {
-            background: #111827;
-            border-radius: .5rem;
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-
-        /* Reset inline styles only for block code */
-        .article-content pre code {
-            background: transparent;
-            border-radius: 0;
-            font-size: inherit;
-        }
-    </style>
-
     <!-- Google Fonts Init -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -101,11 +45,59 @@
 
 <body class="bg-gray-950 text-gray-100 font-[Poppins]">
 
-    <header class="border-b border-gray-800 p-6">
-        <div class="max-w-5xl mx-auto">
-            <a href="/" class="text-2xl font-bold">
+    <header class="sticky top-0 z-50 border-b border-gray-800 bg-gray-950/80 backdrop-blur">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-8">
+
+            <!-- Logo -->
+            <a href="/" class="text-2xl font-bold shrink-0">
                 {{ config('app.name') }}
             </a>
+
+            <!-- Navigation + Search -->
+            <div class="hidden md:flex items-center gap-6 flex-1 justify-end">
+
+                <nav class="flex items-center gap-6 text-gray-300">
+                    <a href="/articles"
+                        class="{{ request()->is('articles*') ? 'text-white' : 'text-gray-300' }} hover:text-white transition">
+                        Articles
+                    </a>
+                </nav>
+
+                <!-- Search -->
+                <form action="/search" method="GET">
+                    <div class="relative">
+                        <input
+                            type="search"
+                            name="q"
+                            placeholder="Search..."
+                            class="w-48 rounded-lg border border-gray-700 bg-gray-900 px-4 py-2 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none">
+                    </div>
+                </form>
+
+            </div>
+
+            <!-- Mobile Menu -->
+<div id="mobile-menu"
+    class="hidden md:hidden absolute top-full left-0 w-full bg-gray-900 border-t border-gray-700 shadow-2xl">
+
+    <nav class="flex flex-col px-6 py-5 text-gray-300">
+
+        <a href="/articles"
+            class="{{ request()->is('articles*') ? 'text-white' : 'text-gray-300' }} rounded-md px-3 py-2 hover:bg-gray-800 hover:text-white transition">
+            Articles
+        </a>
+
+    </nav>
+
+</div>
+
+            <!-- Mobile Button -->
+            <button
+                id="mobile-menu-button"
+                class="md:hidden text-gray-300">
+                ☰
+            </button>
+
         </div>
     </header>
 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\SearchController;
 
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
@@ -25,6 +26,11 @@ Route::get('/articles', [ArticleController::class, 'index'])
 Route::get('/articles/{article:slug}', [ArticleController::class, 'show'])
     ->name('articles.show');
 
+
+// Search
+
+Route::get('/search', [SearchController::class, 'index'])
+    ->name('search');
 
 // Sitemap
 Route::get('/sitemap.xml', function () {

@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Laravel\Scout\Searchable;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
+    use Searchable;
+
     protected $fillable = [
         'title',
         'slug',
@@ -34,5 +38,29 @@ class Article extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function searchableAs()
+    {
+        return app()->environment('production')
+            ? 'articles'
+            : 'dev_articles';
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title,
+
+            'excerpt' => $this->excerpt,
+
+            'content' => strip_tags($this->content),
+
+            'tags' => $this->tags
+                ->pluck('name')
+                ->implode(' '),
+
+            'image' => $this->coverImage?->alt_text,
+        ];
     }
 }
