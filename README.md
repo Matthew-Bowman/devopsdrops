@@ -22,10 +22,10 @@ A collection of potential features, improvements, and ideas for this project.
 ## User Experience
 
 - [ ] Add dark/light theme support
-- [ ] Add search functionality
+- [X] Add search functionality
 - [ ] Add advanced filtering by tags
-- [ ] Add category pages
-- [ ] Add breadcrumbs
+- [X] Add category pages
+- [X] Add breadcrumbs
 
 ## Author & Profile Features
 
