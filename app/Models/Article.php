@@ -40,6 +40,11 @@ class Article extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function topics()
+    {
+        return $this->belongsToMany(Topic::class);
+    }
+
     public function searchableAs()
     {
         return app()->environment('production')
