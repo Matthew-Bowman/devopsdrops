@@ -66,17 +66,16 @@ Route::get('/sitemap.xml', function () {
         );
 
     Topic::where('is_published', true)
-        ->each(function ($topic) {
+        ->each(function ($topic) use ($sitemap) {
 
-            Sitemap::create()
-                ->add(
-                    Url::create(
-                        route(
-                            'topics.show',
-                            $topic
-                        )
+            $sitemap->add(
+                Url::create(
+                    route(
+                        'topics.show',
+                        $topic
                     )
-                );
+                )
+            );
         });
 
     Article::query()
