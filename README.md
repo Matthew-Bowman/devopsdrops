@@ -13,7 +13,7 @@ A collection of potential features, improvements, and ideas for this project.
 
 ## Content Improvements
 
-- [ ] Add syntax highlighting for code blocks
+- [X] Add syntax highlighting for code blocks
 - [ ] Add support for embedded content
 - [ ] Add image captions
 - [ ] Add image galleries
