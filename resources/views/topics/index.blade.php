@@ -3,7 +3,7 @@
 
 @section('title', 'Topics - ' . config('app.name'))
 
-@section('description', 'Explore DevOps Drops topics covering DevOps, cloud infrastructure, Linux, networking, containers, Kubernetes, automation, and more.')
+@section('description', 'Explore ' . config("app.name") . ' topics covering DevOps, cloud infrastructure, Linux, networking, containers, Kubernetes, automation, and more.')
 
 
 @section('breadcrumbs')
@@ -35,7 +35,7 @@
 
 
         <p class="text-gray-400 max-w-3xl">
-            Explore DevOps Drops topics covering cloud infrastructure,
+            Explore {{ config("app.name") }} topics covering cloud infrastructure,
             Linux, networking, containers, Kubernetes, automation,
             and modern engineering practices.
         </p>

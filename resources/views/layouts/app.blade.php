@@ -49,47 +49,75 @@
         <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-8">
 
             <!-- Logo -->
-            <a href="/" class="text-2xl font-bold shrink-0">
+            <a href="{{ route('home') }}" class="text-2xl font-bold shrink-0">
                 {{ config('app.name') }}
             </a>
+
 
             <!-- Navigation + Search -->
             <div class="hidden md:flex items-center gap-6 flex-1 justify-end">
 
                 <nav class="flex items-center gap-6 text-gray-300">
-                    <a href="/articles"
+
+                    <a href="{{ route('articles.index') }}"
                         class="{{ request()->is('articles*') ? 'text-white' : 'text-gray-300' }} hover:text-white transition">
                         Articles
                     </a>
+
+
+                    <a href="{{ route('topics.index') }}"
+                        class="{{ request()->is('topics*') ? 'text-white' : 'text-gray-300' }} hover:text-white transition">
+                        Topics
+                    </a>
+
                 </nav>
 
+
                 <!-- Search -->
-                <form action="/search" method="GET">
+                <form action="{{ route('search') }}" method="GET">
+
                     <div class="relative">
+
                         <input
                             type="search"
                             name="q"
                             placeholder="Search..."
                             class="w-48 rounded-lg border border-gray-700 bg-gray-900 px-4 py-2 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none">
+
                     </div>
+
                 </form>
 
             </div>
+
+
 
             <!-- Mobile Menu -->
             <div id="mobile-menu"
                 class="hidden md:hidden absolute top-full left-0 w-full bg-gray-900 border-t border-gray-700 shadow-2xl">
 
+
                 <nav class="flex flex-col px-6 py-5 text-gray-300">
 
-                    <a href="/articles"
+
+                    <a href="{{ route('articles.index') }}"
                         class="{{ request()->is('articles*') ? 'text-white' : 'text-gray-300' }} rounded-md px-3 py-2 hover:bg-gray-800 hover:text-white transition">
                         Articles
                     </a>
 
+
+                    <a href="{{ route('topics.index') }}"
+                        class="{{ request()->is('topics*') ? 'text-white' : 'text-gray-300' }} rounded-md px-3 py-2 hover:bg-gray-800 hover:text-white transition">
+                        Topics
+                    </a>
+
+
                 </nav>
 
+
             </div>
+
+
 
             <!-- Mobile Button -->
             <button
@@ -97,6 +125,7 @@
                 class="md:hidden text-gray-300">
                 ☰
             </button>
+
 
         </div>
     </header>
