@@ -81,6 +81,28 @@
 
 <article>
 
+    @section('breadcrumbs')
+
+    <x-breadcrumbs :items="[
+    [
+        'label' => 'Home',
+        'url' => '/'
+    ],
+    [
+        'label' => 'Topics',
+        'url' => '/topics'
+    ],
+    [
+        'label' => $article->topics->first()->name,
+        'url' => route('topics.show', $article->topics->first())
+    ],
+    [
+        'label' => $article->title
+    ]
+]" />
+
+    @endsection
+
     <h1 class="text-5xl font-bold mb-4">
         {{ $article->title }}
     </h1>

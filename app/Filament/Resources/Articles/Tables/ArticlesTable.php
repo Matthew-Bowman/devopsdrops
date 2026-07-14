@@ -14,14 +14,14 @@ class ArticlesTable
     {
         return $table
             ->columns([
-		TextColumn::make('title')
-	            ->searchable(),
+                TextColumn::make('title')
+                    ->searchable(),
 
-	        TextColumn::make('published_at')
-	            ->dateTime(),
+                TextColumn::make('published_at')
+                    ->dateTime(),
 
-	        TextColumn::make('created_at')
-	            ->dateTime(),
+                TextColumn::make('created_at')
+                    ->dateTime(),
             ])
             ->filters([
                 //

@@ -6,6 +6,20 @@
 
 <div class="max-w-7xl mx-auto">
 
+    @section('breadcrumbs')
+
+    <x-breadcrumbs :items="[
+    [
+        'label' => 'Home',
+        'url' => route('home')
+    ],
+    [
+        'label' => 'Articles'
+    ]
+]" />
+
+    @endsection
+
     <div class="mb-10">
         <h1 class="text-4xl font-bold mb-3">
             Articles

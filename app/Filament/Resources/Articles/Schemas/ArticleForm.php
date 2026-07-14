@@ -27,11 +27,24 @@ class ArticleForm
 					->multiple()
 					->searchable()
 					->preload()
+					->required()
+					->minItems(1)
 					->createOptionForm([
 						TextInput::make('name')
 							->required()
 							->unique('tags', 'name'),
 					]),
+
+				Select::make('topics')
+					->relationship(
+						'topics',
+						'name'
+					)
+					->multiple()
+					->preload()
+					->searchable()
+					->required()
+					->minItems(1),
 
 				Select::make('cover_image_id')
 					->required()

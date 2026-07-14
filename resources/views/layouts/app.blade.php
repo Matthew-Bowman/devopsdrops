@@ -77,19 +77,19 @@
             </div>
 
             <!-- Mobile Menu -->
-<div id="mobile-menu"
-    class="hidden md:hidden absolute top-full left-0 w-full bg-gray-900 border-t border-gray-700 shadow-2xl">
+            <div id="mobile-menu"
+                class="hidden md:hidden absolute top-full left-0 w-full bg-gray-900 border-t border-gray-700 shadow-2xl">
 
-    <nav class="flex flex-col px-6 py-5 text-gray-300">
+                <nav class="flex flex-col px-6 py-5 text-gray-300">
 
-        <a href="/articles"
-            class="{{ request()->is('articles*') ? 'text-white' : 'text-gray-300' }} rounded-md px-3 py-2 hover:bg-gray-800 hover:text-white transition">
-            Articles
-        </a>
+                    <a href="/articles"
+                        class="{{ request()->is('articles*') ? 'text-white' : 'text-gray-300' }} rounded-md px-3 py-2 hover:bg-gray-800 hover:text-white transition">
+                        Articles
+                    </a>
 
-    </nav>
+                </nav>
 
-</div>
+            </div>
 
             <!-- Mobile Button -->
             <button
@@ -102,7 +102,11 @@
     </header>
 
     <main class="max-w-5xl mx-auto p-6">
+
+        @yield('breadcrumbs')
+
         @yield('content')
+
     </main>
 
     <footer class="border-t border-gray-800 p-6 mt-10">

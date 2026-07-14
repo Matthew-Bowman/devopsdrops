@@ -14,6 +14,7 @@ class Topic extends Model
         'seo_description',
         'content',
         'is_published',
+        'cover_image_id',
     ];
 
 
@@ -22,5 +23,10 @@ class Topic extends Model
         return $this->belongsToMany(
             Article::class
         );
+    }
+
+    public function coverImage()
+    {
+        return $this->belongsTo(Media::class, 'cover_image_id');
     }
 }

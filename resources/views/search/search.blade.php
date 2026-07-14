@@ -6,6 +6,20 @@
 
 <div class="max-w-5xl mx-auto">
 
+    @section('breadcrumbs')
+
+    <x-breadcrumbs :items="[
+    [
+        'label' => 'Home',
+        'url' => '/'
+    ],
+    [
+        'label' => 'Search'
+    ]
+]" />
+
+    @endsection
+
     <section class="py-12">
 
         @if($query)
