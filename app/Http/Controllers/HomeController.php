@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\Tag;
+use App\Models\Topic;
 
 class HomeController extends Controller
 {
@@ -15,7 +15,7 @@ class HomeController extends Controller
             ->limit(6)
             ->get();
 
-        $topics = Tag::withCount('articles')
+        $topics = Topic::withCount('articles')
             ->orderByDesc('articles_count')
             ->limit(6)
             ->get();
