@@ -66,7 +66,7 @@
             @if($topic->coverImage)
 
             <img
-                src="{{ Storage::url($topic->coverImage->path) }}"
+                src="{{ $topic->coverImage->url('M') }}"
                 alt="{{ $topic->name }}"
                 class="w-full h-48 object-cover" />
 

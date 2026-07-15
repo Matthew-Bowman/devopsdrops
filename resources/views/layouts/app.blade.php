@@ -26,24 +26,18 @@
 
     <meta property="article:published_time" content="@yield('published_time')">
 
-    <!-- Tailwind Import -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Site JS -->
-    @vite(['resources/js/app.js'])
+    <!-- Site JS & CSS -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Google Fonts Init -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Google Fonts - Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <!-- Umami Analytics -->
     <script defer src="https://umami.devopsdrops.uk/script.js" data-website-id="9f831009-776a-4559-921f-143fca4220ec"></script>
 </head>
 
-<body class="bg-gray-950 text-gray-100 font-[Poppins]">
+<body class="bg-gray-950 text-gray-100 font-sans">
 
     <header class="sticky top-0 z-50 border-b border-gray-800 bg-gray-950/80 backdrop-blur">
         <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-8">

@@ -5,7 +5,7 @@
 @section('og_title', $article->title)
 @section('og_description', $article->excerpt)
 @section('og_type', 'article')
-@section('og_image', url(Storage::url($article->coverImage->path)))
+@section('og_image', url(Storage::url($article->coverImage->url('N'))))
 @section('published_time', $article->published_at->toISOString())
 
 @section('content')
@@ -153,7 +153,7 @@
 
     </div>
 
-    <img style="aspect-ratio: 16/9; object-fit: cover;" src="{{ Storage::url($article->coverImage->path) }}" alt="{{ $article->coverImage->alt_text }}">
+    <img style="aspect-ratio: 16/9; object-fit: cover;" src="{{ $article->coverImage->url('N')) }}" alt="{{ $article->coverImage->alt_text }}">
 
     <div class="article-content max-w-none">
         {!! $article->content !!}

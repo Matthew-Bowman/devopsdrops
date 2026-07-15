@@ -3,7 +3,7 @@
     @if($article->coverImage)
     <div>
         <img
-            src="{{ Storage::url($article->coverImage->path) }}"
+            src="{{ $article->coverImage->url('M') }}"
             alt="{{ $article->coverImage->alt_text ?? $article->title }}"
             class="w-full aspect-video object-cover group-hover:scale-105 transition duration-300">
     </div>

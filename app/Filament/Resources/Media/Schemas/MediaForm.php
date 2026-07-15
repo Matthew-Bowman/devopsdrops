@@ -21,18 +21,32 @@ class MediaForm
                     ->disk('public')
                     ->directory('media')
                     ->saveUploadedFileUsing(function (TemporaryUploadedFile $file): string {
-                        $filename = Str::uuid() . '.webp';
-                        $relativePath = "media/{$filename}";
-                        $destination = storage_path("app/public/{$relativePath}");
+                        $filename = Str::uuid();
+                        $directory = storage_path('app/public/media');
 
-                        Image::load($file->getRealPath())
-                            ->format('webp')
-                            ->quality(85)
-                            ->save($destination);
+                        $sizes = [
+                            'N' => null,
+                            'L' => 1600,
+                            'M' => 600,
+                            'S' => 300,
+                        ];
 
-                        return $relativePath;
-                    })
-                    ->required(),
+                        foreach ($sizes as $suffix => $width) {
+                            $name = $filename . ($suffix === 'N' ? '' : "-{$suffix}") . '.webp';
+
+                            $image = Image::load($file->getRealPath())
+                                ->format('webp')
+                                ->quality(85);
+
+                            if ($width) {
+                                $image->width($width);
+                            }
+
+                            $image->save("{$directory}/{$name}");
+                        }
+
+                        return "media/{$filename}.webp";
+                    }),
 
                 TextInput::make('title')
                     ->required()

@@ -85,7 +85,7 @@
                 <div class="md:w-64 shrink-0 relative z-10 pointer-events-none">
 
                     <img
-                        src="{{ Storage::url($article->coverImage->path) }}"
+                        src="{{ $article->coverImage->url('M') }}"
                         alt="{{ $article->coverImage->alt_text }}"
                         class="w-full h-40 object-cover rounded-lg">
 
