@@ -93,18 +93,28 @@
 
                 <nav class="flex flex-col px-6 py-5 text-gray-300">
 
-
                     <a href="{{ route('articles.index') }}"
                         class="{{ request()->is('articles*') ? 'text-white' : 'text-gray-300' }} rounded-md px-3 py-2 hover:bg-gray-800 hover:text-white transition">
                         Articles
                     </a>
-
 
                     <a href="{{ route('topics.index') }}"
                         class="{{ request()->is('topics*') ? 'text-white' : 'text-gray-300' }} rounded-md px-3 py-2 hover:bg-gray-800 hover:text-white transition">
                         Topics
                     </a>
 
+                    <!-- Mobile Search -->
+                    <form action="{{ route('search') }}" method="GET" class="mt-4">
+
+                        <div class="relative">
+                            <input
+                                type="search"
+                                name="q"
+                                placeholder="Search articles..."
+                                class="w-full rounded-lg border border-gray-700 bg-gray-950 px-4 py-2 text-sm text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none">
+                        </div>
+
+                    </form>
 
                 </nav>
 
