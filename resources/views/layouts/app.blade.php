@@ -205,12 +205,12 @@
                             Explore Topics
                         </h3>
 
-                        <div class="flex flex-wrap gap-2">
+                        <div>
 
                             @foreach($footerTopics ?? [] as $topic)
 
                             <a href="{{ route('topics.show', $topic) }}"
-                                class="text-sm text-gray-400 transition hover:text-white">
+                                class="block text-sm text-gray-400 transition hover:text-white">
 
                                 {{ $topic->name }}
 
