@@ -8,6 +8,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\CheckboxList;
 
 class ArticleForm
 {
@@ -35,16 +36,16 @@ class ArticleForm
 							->unique('tags', 'name'),
 					]),
 
-				Select::make('topics')
-					->relationship(
-						'topics',
-						'name'
-					)
-					->multiple()
-					->preload()
+				Select::make('primary_topic_id')
+					->label('Primary Topic')
+					->relationship('primaryTopic', 'name')
 					->searchable()
-					->required()
-					->minItems(1),
+					->preload()
+					->required(),
+
+				CheckboxList::make('topics')
+					->label('Additional Topics')
+					->relationship('topics', 'name'),
 
 				Select::make('cover_image_id')
 					->required()

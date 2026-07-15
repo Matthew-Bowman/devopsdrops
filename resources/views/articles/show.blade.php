@@ -93,8 +93,8 @@
         'url' => '/topics'
     ],
     [
-        'label' => $article->topics->first()->name,
-        'url' => route('topics.show', $article->topics->first())
+        'label' => $article->primaryTopic->name,
+        'url' => route('topics.show', $article->primaryTopic)
     ],
     [
         'label' => $article->title

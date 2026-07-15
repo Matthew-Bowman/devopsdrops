@@ -10,6 +10,19 @@ class Article extends Model
 {
     use Searchable;
 
+    protected static function booted(): void
+    {
+        static::saved(function (Article $article) {
+
+            if ($article->primary_topic_id) {
+
+                $article->topics()->syncWithoutDetaching([
+                    $article->primary_topic_id,
+                ]);
+            }
+        });
+    }
+
     protected $fillable = [
         'title',
         'slug',
@@ -38,6 +51,11 @@ class Article extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function primaryTopic()
+    {
+        return $this->belongsTo(Topic::class, 'primary_topic_id');
     }
 
     public function topics()
