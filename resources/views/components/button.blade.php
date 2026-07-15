@@ -1,19 +1,47 @@
-<a {{ $attributes->merge([
-    'class' => 'group relative inline-flex items-center gap-2 px-8 py-3 rounded-xl font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300'
-]) }}>
+@props([
+    'href' => null,
+])
 
-    <span>{{ $slot }}</span>
+@if($href)
+    <a
+        href="{{ $href }}"
+        {{ $attributes->merge([
+            'class' => 'group relative inline-flex items-center gap-2 px-8 py-3 rounded-xl font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300'
+        ]) }}
+    >
+        <span>{{ $slot }}</span>
 
-    <svg
-        class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 ">
-        <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M13 7l5 5m0 0l-5 5m5-5H6" />
-    </svg>
+        <svg
+            class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+    </a>
+@else
+    <button
+        type="{{ $attributes->get('type', 'button') }}"
+        {{ $attributes->except('type')->merge([
+            'class' => 'group relative inline-flex items-center gap-2 px-8 py-3 rounded-xl font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300'
+        ]) }}
+    >
+        <span>{{ $slot }}</span>
 
-</a>
+        <svg
+            class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+    </button>
+@endif
