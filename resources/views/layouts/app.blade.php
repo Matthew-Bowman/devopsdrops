@@ -9,10 +9,6 @@
 
     <meta name="description" content="@yield('description', 'DevOps tutorials, guides and infrastructure articles.')">
 
-    <title>@yield('title', config('app.name'))</title>
-
-    <meta name="description" content="@yield('description', 'DevOps guides, tutorials, and infrastructure articles.')">
-
     <meta property="og:title" content="@yield('og_title', config('app.name'))">
     <meta property="og:description" content="@yield('og_description', 'DevOps guides, tutorials, and infrastructure articles.')">
     <meta property="og:type" content="@yield('og_type', 'website')">
@@ -142,11 +138,120 @@
 
     </main>
 
-    <footer class="border-t border-gray-800 p-6 mt-10">
-        <div class="max-w-5xl mx-auto text-gray-400">
-            © {{ date('Y') }} {{ config('app.name') }}
+
+
+    <footer class="border-t border-gray-800 bg-gray-950">
+        <div class="max-w-5xl mx-auto p-6">
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+
+                <!-- Brand -->
+                <div class="md:col-span-2 mb-4">
+
+                    <a href="{{ route('home') }}"
+                        class="text-2xl font-bold text-white tracking-tight">
+                        {{ config('app.name') }}
+                    </a>
+
+                    <p class="mt-2 max-w-md text-sm leading-6 text-gray-400">
+                        Engineering-focused guides covering DevOps, Linux,
+                        cloud infrastructure, networking, automation,
+                        and modern software delivery practices.
+                    </p>
+
+                </div>
+
+
+                <div class="flex flex-row flex-wrap gap-6 mb-4">
+                    <!-- Navigation -->
+                    <div>
+
+                        <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-300">
+                            Resources
+                        </h3>
+
+                        <ul class="mt-1 space-y-3 text-sm text-gray-400">
+
+                            <li>
+                                <a href="{{ route('articles.index') }}"
+                                    class="hover:text-white transition">
+                                    Articles
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('topics.index') }}"
+                                    class="hover:text-white transition">
+                                    Topics
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('search') }}"
+                                    class="hover:text-white transition">
+                                    Search
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <!-- Topics -->
+                    <div>
+
+                        <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-300">
+                            Explore Topics
+                        </h3>
+
+                        <div class="flex flex-wrap gap-2">
+
+                            @foreach($footerTopics ?? [] as $topic)
+
+                            <a href="{{ route('topics.show', $topic) }}"
+                                class="text-sm text-gray-400 transition hover:text-white">
+
+                                {{ $topic->name }}
+
+                            </a>
+
+                            @endforeach
+
+                        </div>
+
+                        <a href="{{ route('topics.index') }}"
+                            class="inline-flex items-center text-sm text-blue-400 hover:text-blue-300 transition">
+                            View all topics
+                            <span class="ml-1">→</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- Bottom -->
+            <div class="mt-12 border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+
+                <p class="text-sm mt-2 text-gray-500">
+                    © {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+                </p>
+
+
+                <p class="text-sm text-gray-600 font-mono">
+                    built with curiosity & automation
+                </p>
+
+            </div>
+
         </div>
+
     </footer>
+
 
 </body>
 
