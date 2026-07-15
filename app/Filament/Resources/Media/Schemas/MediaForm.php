@@ -6,6 +6,9 @@ use Filament\Schemas\Schema;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
+use Illuminate\Support\Str;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Spatie\Image\Image;
 
 class MediaForm
 {
@@ -15,8 +18,20 @@ class MediaForm
             ->components([
                 FileUpload::make('path')
                     ->image()
-                    ->directory('media')
                     ->disk('public')
+                    ->directory('media')
+                    ->saveUploadedFileUsing(function (TemporaryUploadedFile $file): string {
+                        $filename = Str::uuid() . '.webp';
+                        $relativePath = "media/{$filename}";
+                        $destination = storage_path("app/public/{$relativePath}");
+
+                        Image::load($file->getRealPath())
+                            ->format('webp')
+                            ->quality(85)
+                            ->save($destination);
+
+                        return $relativePath;
+                    })
                     ->required(),
 
                 TextInput::make('title')
