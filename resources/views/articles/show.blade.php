@@ -153,7 +153,7 @@
 
     </div>
 
-    <img style="aspect-ratio: 16/9; object-fit: cover;" src="{{ $article->coverImage->url('N')) }}" alt="{{ $article->coverImage->alt_text }}">
+    <img style="aspect-ratio: 16/9; object-fit: cover;" src="{{ $article->coverImage->url('N') }}" alt="{{ $article->coverImage->alt_text }}">
 
     <div class="article-content max-w-none">
         {!! $article->content !!}
