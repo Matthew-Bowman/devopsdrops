@@ -53,6 +53,8 @@
         <a href="{{ route('topics.show', $topic) }}"
             class="
                     group
+                    flex
+                    flex-col
                     rounded-xl
                     overflow-hidden
                     border
@@ -89,7 +91,7 @@
 
 
 
-            <div class="p-6">
+            <div class="p-6 flex flex-col grow">
 
 
                 <h2 class="
@@ -117,7 +119,7 @@
 
 
 
-                <div class="text-sm text-gray-500">
+                <div class="text-sm text-gray-500 mt-auto">
 
                     {{ $topic->articles_count }}
                     {{ Str::plural('article', $topic->articles_count) }}
