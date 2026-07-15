@@ -36,8 +36,11 @@
 
         <div class="grid md:grid-cols-3 gap-8">
 
-            @foreach($articles as $article)
-            <x-article-card :article="$article" />
+            @foreach($articles as $index => $article)
+            <x-article-card 
+                :article="$article"
+                :priority="$index === 0"    
+            />
             @endforeach
 
         </div>

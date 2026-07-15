@@ -1,10 +1,27 @@
+@props([
+'article',
+'priority' => false,
+])
+
 <article class="group relative flex flex-col bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-blue-500 transition duration-300">
 
     @if($article->coverImage)
     <div>
         <img
             src="{{ $article->coverImage->url('M') }}"
+            srcset="
+                {{ $article->coverImage->url('S') }} 400w,
+                {{ $article->coverImage->url('M') }} 800w
+            "
+            sizes="(max-width: 768px) 100vw, 33vw"
             alt="{{ $article->coverImage->alt_text ?? $article->title }}"
+            width="800"
+            height="450"
+            @if($priority)
+            fetchpriority="high"
+            @else
+            loading="lazy"
+            @endif
             class="w-full aspect-video object-cover group-hover:scale-105 transition duration-300">
     </div>
     @endif
