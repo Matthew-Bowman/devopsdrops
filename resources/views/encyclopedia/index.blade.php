@@ -233,6 +233,7 @@
             <a href="{{ route('encyclopedia.show', $entry) }}"
                 class="
                     group
+                    flex flex-col
                     rounded-xl
                     border
                     border-gray-800
@@ -269,13 +270,13 @@
                 </h3>
 
 
-                <p class="text-gray-400 leading-relaxed">
+                <p class="text-gray-400 leading-relaxed mb-4">
                     {{ $entry->excerpt }}
                 </p>
 
 
                 <div class="
-                    mt-6
+                    mt-auto
                     text-sm
                     text-indigo-400
                 ">
