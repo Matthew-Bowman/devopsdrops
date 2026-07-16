@@ -7,6 +7,10 @@
 
     <title>@yield('title', config('app.name'))</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/devopsdrops.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
     <meta name="description" content="@yield('description', 'DevOps tutorials, guides and infrastructure articles.')">
 
     <meta property="og:title" content="@yield('og_title', config('app.name'))">
@@ -38,9 +42,18 @@
     <header class="sticky top-0 z-50 border-b border-gray-800 bg-gray-950/80 backdrop-blur">
         <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-8">
 
-            <!-- Logo -->
-            <a href="{{ route('home') }}" class="text-2xl font-bold shrink-0">
-                {{ config('app.name') }}
+            <a href="{{ route('home') }}"
+                class="flex items-center gap-3 text-2xl font-bold tracking-tight text-white">
+
+                <img
+                    src="{{ asset('devopsdrops.svg') }}"
+                    alt=""
+                    class="h-8 w-8">
+
+                <span>
+                    {{ config('app.name') }}
+                </span>
+
             </a>
 
             <!-- Navigation + Search -->
@@ -389,6 +402,7 @@
 
 
     <aside
+        x-cloak
         x-show="encyclopediaOpen"
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="translate-x-full"
