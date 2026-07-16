@@ -108,6 +108,7 @@
             <a href="{{ route('encyclopedia.show', $entry) }}"
                 class="
                     group
+                    flex flex-col
                     rounded-2xl
                     border
                     border-gray-800
