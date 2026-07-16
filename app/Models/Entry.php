@@ -18,6 +18,7 @@ class Entry extends Model
         'parent_entry_id',
         'topic_id',
         'published_at',
+        'published',
     ];
 
 
