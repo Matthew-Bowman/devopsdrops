@@ -81,7 +81,6 @@ class EncyclopediaController extends Controller
             'topic',
             'entryType',
             'tags',
-            'relatedEntries',
             'parent',
         ]);
 
@@ -114,15 +113,13 @@ class EncyclopediaController extends Controller
         ];
 
 
-        $relatedEntries = $entry->relatedEntries
-            ->where('published', true);
-
-
+        $exploreEntries = $entry->exploreEntries();
+        
         return view(
             'encyclopedia.show',
             compact(
                 'entry',
-                'relatedEntries',
+                'exploreEntries',
                 'breadcrumbs',
             )
         );

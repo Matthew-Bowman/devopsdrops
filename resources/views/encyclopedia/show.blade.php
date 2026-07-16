@@ -150,35 +150,100 @@
     </div>
 
 
-    @if($relatedEntries->count())
+    @if($exploreEntries->count())
 
     <section class="mt-20 border-t border-gray-800 pt-12">
 
         <div class="rounded-xl bg-gray-900/40 border border-gray-800 p-8">
 
             <h2 class="text-3xl font-bold mb-2">
-                Related Entries
+                Continue Exploring
             </h2>
 
             <p class="text-gray-400 mb-8">
-                Continue exploring related concepts and technologies.
+                Explore related concepts and continue through the encyclopedia.
             </p>
 
 
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-3 gap-6">
 
-                @foreach($relatedEntries as $relatedEntry)
+                @foreach($exploreEntries as $exploreEntry)
 
-                <a href="{{ route('entries.show', $relatedEntry->slug) }}"
-                    class="block rounded-xl border border-gray-800 bg-gray-900/40 p-6 hover:border-gray-600 transition">
+                <a href="{{ route('encyclopedia.show', $exploreEntry) }}"
+                    class="
+                    group
+                    block
+                    rounded-xl
+                    border
+                    border-gray-800
+                    bg-gray-950/40
+                    p-6
+                    transition
+                    hover:border-indigo-500/50
+                    hover:-translate-y-1
+                ">
 
-                    <h3 class="text-xl font-semibold mb-2">
-                        {{ $relatedEntry->title }}
+
+                    @if($exploreEntry->id === $entry->parent_entry_id)
+
+                    <div class="text-xs uppercase tracking-wider text-indigo-400 mb-3">
+                        Parent Entry
+                    </div>
+
+                    @elseif($exploreEntry->parent_entry_id === $entry->parent_entry_id)
+
+                    <div class="text-xs uppercase tracking-wider text-gray-500 mb-3">
+                        Related Entry
+                    </div>
+
+                    @else
+
+                    <div class="text-xs uppercase tracking-wider text-gray-500 mb-3">
+                        Explore Next
+                    </div>
+
+                    @endif
+
+
+                    <h3 class="
+                    text-xl
+                    font-semibold
+                    mb-3
+                    text-white
+                    group-hover:text-indigo-300
+                    transition
+                ">
+                        {{ $exploreEntry->title }}
                     </h3>
 
-                    <p class="text-gray-400">
-                        {{ $relatedEntry->excerpt }}
+
+                    @if($exploreEntry->excerpt)
+
+                    <p class="text-gray-400 leading-relaxed">
+                        {{ Str::limit($exploreEntry->excerpt, 120) }}
                     </p>
+
+                    @endif
+
+
+                    <div class="
+                    mt-6
+                    flex
+                    items-center
+                    text-sm
+                    text-indigo-400
+                    group-hover:text-indigo-300
+                    transition
+                ">
+
+                        View entry
+
+                        <span class="ml-2 group-hover:translate-x-1 transition">
+                            →
+                        </span>
+
+                    </div>
+
 
                 </a>
 

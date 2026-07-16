@@ -40,14 +40,37 @@ class Entry extends Model
     }
 
 
-    public function relatedEntries()
+    public function exploreEntries()
     {
-        return $this->belongsToMany(
-            Entry::class,
-            'entry_relations',
-            'entry_id',
-            'related_entry_id'
-        );
+        $entries = collect();
+
+        // Parent
+        if ($this->parent) {
+            $entries->push($this->parent);
+        }
+
+        // Children
+        if ($entries->count() < 3) {
+            $entries = $entries->merge(
+                $this->children()
+                    ->where('published', true)
+                    ->limit(3 - $entries->count())
+                    ->get()
+            );
+        }
+
+        // Siblings
+        if ($entries->count() < 3 && $this->parent_entry_id) {
+            $entries = $entries->merge(
+                Entry::where('parent_entry_id', $this->parent_entry_id)
+                    ->where('id', '!=', $this->id)
+                    ->where('published', true)
+                    ->limit(3 - $entries->count())
+                    ->get()
+            );
+        }
+
+        return $entries;
     }
 
     public function ancestors()
