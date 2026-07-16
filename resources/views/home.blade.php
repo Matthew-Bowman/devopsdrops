@@ -12,17 +12,57 @@
     <section class="py-20 text-center">
 
         <h1 class="text-6xl font-bold mb-6">
-            {{config('app.name')}}
+            {{ config('app.name') }}
         </h1>
 
-        <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-8">
-            Practical guides, tutorials, and insights covering DevOps,
+
+        <p class="
+        text-xl
+        text-gray-400
+        max-w-3xl
+        mx-auto
+        mb-10
+        leading-relaxed
+    ">
+            Practical guides, tutorials, and reference material covering DevOps,
             cloud infrastructure, automation, and modern engineering.
         </p>
 
-        <x-button href="{{ route('articles.index') }}">
+
+        <div class="
+            flex
+            flex-wrap
+            justify-center
+            items-center
+            gap-4 ">
+
+            <x-button href=" {{ route('articles.index') }}">
             Explore Articles
-        </x-button>
+            </x-button>
+
+
+            <a href="{{ route('encyclopedia.index') }}"
+                class="
+                inline-flex
+                items-center
+                justify-center
+                rounded-lg
+                border
+                border-gray-700
+                bg-gray-900
+                px-6
+                py-3
+                text-sm
+                font-medium
+                text-gray-300
+                transition
+                hover:border-indigo-500
+                hover:text-white
+            ">
+                Browse Encyclopedia
+            </a>
+
+        </div>
 
     </section>
 
@@ -37,10 +77,9 @@
         <div class="grid md:grid-cols-3 gap-8">
 
             @foreach($articles as $index => $article)
-            <x-article-card 
+            <x-article-card
                 :article="$article"
-                :priority="$index === 0"    
-            />
+                :priority="$index === 0" />
             @endforeach
 
         </div>

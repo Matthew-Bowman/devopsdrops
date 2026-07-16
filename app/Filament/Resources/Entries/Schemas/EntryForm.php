@@ -6,6 +6,8 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
 
 class EntryForm
@@ -21,15 +23,17 @@ class EntryForm
                 Textarea::make('excerpt')
                     ->default(null)
                     ->columnSpanFull(),
-                Textarea::make('content')
+                RichEditor::make('content')
                     ->required()
                     ->columnSpanFull(),
-                TextInput::make('entry_type_id')
-                    ->numeric()
-                    ->default(null),
-                TextInput::make('topic_id')
-                    ->numeric()
-                    ->default(null),
+                Select::make('topic_id')
+                    ->label('Topic')
+                    ->relationship('topic', 'name'),
+                Select::make('entry_type_id')
+                    ->required()
+                    ->relationship('entryType', 'name')
+                    ->searchable()
+                    ->preload(),
                 Toggle::make('published')
                     ->required(),
                 DateTimePicker::make('published_at'),

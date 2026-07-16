@@ -25,6 +25,11 @@ class Topic extends Model
         );
     }
 
+    public function entries()
+    {
+        return $this->hasMany(Entry::class);
+    }
+
     public function coverImage()
     {
         return $this->belongsTo(Media::class, 'cover_image_id');

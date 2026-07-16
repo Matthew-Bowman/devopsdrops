@@ -60,6 +60,11 @@
                         Topics
                     </a>
 
+                    <a href="{{ route('encyclopedia.index') }}"
+                        class="{{ request()->is('topics*') ? 'text-white' : 'text-gray-300' }} hover:text-white transition">
+                        Encyclopedia
+                    </a>
+
                 </nav>
 
 
@@ -97,6 +102,11 @@
                     <a href="{{ route('topics.index') }}"
                         class="{{ request()->is('topics*') ? 'text-white' : 'text-gray-300' }} rounded-md px-3 py-2 hover:bg-gray-800 hover:text-white transition">
                         Topics
+                    </a>
+                    
+                    <a href="{{ route('encyclopedia.index') }}"
+                        class="{{ request()->is('topics*') ? 'text-white' : 'text-gray-300' }} rounded-md px-3 py-2 hover:bg-gray-800 hover:text-white transition">
+                        Encyclopedia
                     </a>
 
                     <!-- Mobile Search -->
@@ -176,6 +186,13 @@
                                 <a href="{{ route('articles.index') }}"
                                     class="hover:text-white transition">
                                     Articles
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="{{ route('encyclopedia.index') }}"
+                                    class="hover:text-white transition">
+                                    Encyclopedia
                                 </a>
                             </li>
 

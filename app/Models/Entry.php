@@ -23,7 +23,7 @@ class Entry extends Model
     }
 
 
-    public function type()
+    public function entryType()
     {
         return $this->belongsTo(EntryType::class);
     }
