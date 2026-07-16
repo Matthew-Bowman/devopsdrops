@@ -1,5 +1,6 @@
 import Prism from 'prismjs';
 import Alpine from 'alpinejs';
+import collapse from '@alpinejs/collapse'
 
 
 // Plugins
@@ -42,8 +43,10 @@ mobileMenuButton?.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
 });
 
-window.Alpine = Alpine;
+Alpine.plugin(collapse)
 
-Alpine.start();
+window.Alpine = Alpine
+
+Alpine.start()
 
 Prism.highlightAll();
