@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Entry;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -15,14 +16,21 @@ class SearchController extends Controller
             return view('search.search', [
                 'query' => null,
                 'articles' => collect(),
+                'entries' => collect(),
             ]);
         }
 
-        $articles = Article::search($query)->get();
+        $articles = Article::search($query)
+            ->get();
+
+        $entries = Entry::search($query)
+            ->where('published', true)
+            ->get();
 
         return view('search.search', [
             'query' => $query,
             'articles' => $articles,
+            'entries' => $entries,
         ]);
     }
 }

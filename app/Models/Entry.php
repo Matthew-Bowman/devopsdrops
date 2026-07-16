@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Entry extends Model
 {
+    use Searchable;
+
     protected $fillable = [
         'title',
         'slug',
@@ -81,4 +84,25 @@ class Entry extends Model
         'published_at' => 'datetime',
         'published' => 'boolean',
     ];
+
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'slug' => $this->slug,
+            'excerpt' => $this->excerpt,
+            'content' => strip_tags($this->content),
+
+            'topic' => $this->topic?->name,
+
+            'parent' => $this->parent?->title,
+
+            'ancestors' => $this->ancestors()
+                ->pluck('title')
+                ->implode(' '),
+
+            'published' => $this->published_at !== null,
+        ];
+    }
 }

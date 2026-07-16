@@ -29,7 +29,9 @@
         </h1>
 
         <p class="text-gray-400 mb-6">
-            Showing {{ $articles->count() }} result{{ $articles->count() === 1 ? '' : 's' }} for "{{ $query }}"
+            Showing {{ $articles->count() + $entries->count() }}
+            result{{ ($articles->count() + $entries->count()) === 1 ? '' : 's' }}
+            for "{{ $query }}"
         </p>
 
         @else
@@ -62,6 +64,136 @@
             </div>
 
         </form>
+
+        @if($entries->count())
+
+        <section class="mb-12">
+
+            <div class="mb-6">
+
+                <h2 class="text-3xl font-bold mb-2">
+                    Encyclopedia
+                </h2>
+
+                <p class="text-gray-400">
+                    Reference entries covering DevOps concepts, technologies, and infrastructure.
+                </p>
+
+            </div>
+
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                @foreach($entries as $entry)
+
+                <a href="{{ route('encyclopedia.show', $entry) }}"
+                    class="
+                group
+                block
+                rounded-xl
+                border
+                border-gray-800
+                bg-gray-900/40
+                p-6
+                transition
+                hover:border-indigo-500
+                hover:-translate-y-1
+            ">
+
+
+                    <div class="flex items-center gap-2 text-sm text-gray-500 mb-3">
+
+                        @if($entry->topic)
+
+                        <span>
+                            {{ $entry->topic->name }}
+                        </span>
+
+                        @endif
+
+
+                        @if($entry->entryType)
+
+                        @if($entry->topic)
+                        <span>·</span>
+                        @endif
+
+                        <span>
+                            {{ $entry->entryType->name }}
+                        </span>
+
+                        @endif
+
+                    </div>
+
+
+                    <h3 class="
+                text-2xl
+                font-bold
+                mb-3
+                group-hover:text-indigo-400
+                transition
+            ">
+                        {{ $entry->title }}
+                    </h3>
+
+
+                    @if($entry->parent)
+
+                    <p class="text-sm text-gray-500 mb-3">
+
+                        Part of:
+                        <span class="text-gray-400">
+                            {{ $entry->parent->title }}
+                        </span>
+
+                    </p>
+
+                    @endif
+
+
+                    <p class="text-gray-400 leading-relaxed">
+                        {{ Str::limit($entry->excerpt, 180) }}
+                    </p>
+
+
+                    <div class="
+                mt-6
+                flex
+                items-center
+                justify-between
+                text-sm
+            ">
+
+                        <span class="
+                    text-indigo-400
+                    group-hover:text-indigo-300
+                    transition
+                ">
+                            View entry
+                        </span>
+
+
+                        <span class="
+                    text-indigo-400
+                    group-hover:translate-x-1
+                    transition
+                ">
+                            →
+                        </span>
+
+                    </div>
+
+
+                </a>
+
+                @endforeach
+
+            </div>
+
+        </section>
+
+        @endif
 
 
         @if($articles->count())
@@ -148,12 +280,12 @@
 
         </div>
 
-        @elseif($query)
+        @elseif($query && !$articles->count() && !$entries->count())
 
         <div class="border border-gray-800 rounded-xl p-8 text-center">
 
             <p class="text-gray-400">
-                No articles found for "{{ $query }}".
+                No results found for "{{ $query }}".
             </p>
 
         </div>
