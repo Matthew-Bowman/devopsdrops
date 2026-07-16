@@ -32,6 +32,12 @@ class ViewServiceProvider extends ServiceProvider
                     ->limit(8)
                     ->get(),
 
+                'encyclopediaTree' => Entry::whereNull('parent_entry_id')
+                    ->where('published', true)
+                    ->with('childrenRecursive')
+                    ->orderBy('title')
+                    ->get(),
+
             ]);
         });
     }

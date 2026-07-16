@@ -27,6 +27,12 @@ class Entry extends Model
         return $this->belongsTo(Topic::class);
     }
 
+    public function childrenRecursive()
+    {
+        return $this->children()
+            ->where('published', true)
+            ->with('childrenRecursive');
+    }
 
     public function entryType()
     {

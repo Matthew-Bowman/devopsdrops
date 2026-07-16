@@ -33,7 +33,7 @@
     <script defer src="https://umami.devopsdrops.uk/script.js" data-website-id="9f831009-776a-4559-921f-143fca4220ec"></script>
 </head>
 
-<body class="bg-gray-950 text-gray-100 font-sans">
+<body class="bg-gray-950 text-gray-100 font-sans" x-data="{ encyclopediaOpen:false }">
 
     <header class="sticky top-0 z-50 border-b border-gray-800 bg-gray-950/80 backdrop-blur">
         <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-8">
@@ -42,7 +42,6 @@
             <a href="{{ route('home') }}" class="text-2xl font-bold shrink-0">
                 {{ config('app.name') }}
             </a>
-
 
             <!-- Navigation + Search -->
             <div class="hidden md:flex items-center gap-6 flex-1 justify-end">
@@ -375,6 +374,86 @@
     </footer>
 
 
+    <div
+        x-show="encyclopediaOpen"
+        x-transition.opacity
+        class="
+    fixed
+    inset-0
+    z-50
+    bg-black/50
+    "
+        @click="encyclopediaOpen=false">
+
+    </div>
+
+
+    <aside
+        x-show="encyclopediaOpen"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="translate-x-full"
+        x-transition:enter-end="translate-x-0"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="translate-x-0"
+        x-transition:leave-end="translate-x-full"
+
+        class="
+    fixed
+    top-0
+    right-0
+    z-50
+    h-screen
+    w-full
+    max-w-md
+    overflow-y-auto
+    border-l
+    border-gray-800
+    bg-gray-950
+    p-6
+    ">
+
+        <div class="flex items-center justify-between mb-6">
+
+            <h2 class="text-xl font-bold text-white">
+                Encyclopedia
+            </h2>
+
+
+            <button
+                @click="encyclopediaOpen=false"
+                class="
+            text-gray-400
+            hover:text-white
+            text-xl
+            ">
+                ×
+            </button>
+
+        </div>
+
+
+        <x-encyclopedia-tree
+            :entries="$encyclopediaTree"
+            :current-entry="$entry ?? null" />
+
+    </aside>
+    @if(request()->routeIs('encyclopedia.*'))
+    <button
+        @click="encyclopediaOpen = true"
+        class="
+    fixed
+    bottom-6
+    right-6
+    rounded-full
+    bg-indigo-600
+    p-4
+    shadow-lg
+    hover:bg-indigo-500
+    transition
+    ">
+        🌳
+    </button>
+    @endif
 </body>
 
 </html>
