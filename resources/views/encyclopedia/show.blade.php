@@ -220,7 +220,7 @@
 
                     @if($exploreEntry->excerpt)
 
-                    <p class="text-gray-400 leading-relaxed">
+                    <p class="text-gray-400 leading-relaxed mb-4">
                         {{ Str::limit($exploreEntry->excerpt, 120) }}
                     </p>
 
@@ -229,7 +229,6 @@
 
                     <div class="
                     mt-auto
-                    pt-4
                     flex
                     items-center
                     text-sm
