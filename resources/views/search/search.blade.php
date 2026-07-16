@@ -89,6 +89,7 @@
                 <a href="{{ route('encyclopedia.show', $entry) }}"
                     class="
                 group
+                flex flex-col
                 block
                 rounded-xl
                 border
@@ -152,13 +153,13 @@
                     @endif
 
 
-                    <p class="text-gray-400 leading-relaxed">
+                    <p class="text-gray-400 leading-relaxed mb-4">
                         {{ Str::limit($entry->excerpt, 180) }}
                     </p>
 
 
                     <div class="
-                mt-6
+                mt-auto
                 flex
                 items-center
                 justify-between
