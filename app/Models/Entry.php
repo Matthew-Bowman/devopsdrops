@@ -76,4 +76,9 @@ class Entry extends Model
             'parent_entry_id'
         );
     }
+
+    protected $casts = [
+        'published_at' => 'datetime',
+        'published' => 'boolean',
+    ];
 }
