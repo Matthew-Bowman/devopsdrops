@@ -1,55 +1,34 @@
-<ul class="space-y-1">
+<ul class="space-y-2">
 
-    @foreach($entries as $item)
-
-    @php
-    $isCurrent = $currentEntry?->id === $item->id;
-    $isAncestor = $currentEntry
-    && $currentEntry->ancestors()->contains('id', $item->id);
-    @endphp
-
+    @foreach($entries as $entry)
 
     <li>
 
-        <a href="{{ route('encyclopedia.show', $item) }}"
+        <a href="{{ route('encyclopedia.show', $entry->slug) }}"
             class="
-        block
-        rounded-md
-        px-2
-        py-1
-        text-sm
-        transition
+                    block
+                    text-sm
+                    text-gray-400
+                    hover:text-white
+                    transition
+                    {{ request()->is('encyclopedia/'.$entry->slug) ? 'text-indigo-400 font-semibold' : '' }}
+                ">
 
-        {{ $isCurrent
-            ? 'bg-indigo-500/20 text-indigo-300 font-semibold'
-            : 'text-gray-400 hover:text-white'
-        }}
-        ">
-
-            {{ $item->title }}
+            {{ $entry->title }}
 
         </a>
 
 
-        @if($item->childrenRecursive->count())
+        @if($entry->childrenRecursive->count())
 
-        <div class="
-            ml-4
-            mt-1
-            border-l
-            border-gray-800
-            pl-3
-            {{ $isAncestor || $isCurrent ? '' : 'hidden' }}
-        ">
+        <div class="ml-4 mt-2 border-l border-gray-800 pl-4">
 
             <x-encyclopedia-tree
-                :entries="$item->childrenRecursive"
-                :current-entry="$currentEntry" />
+                :entries="$entry->childrenRecursive" />
 
         </div>
 
         @endif
-
 
     </li>
 

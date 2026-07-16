@@ -433,8 +433,7 @@
 
 
         <x-encyclopedia-tree
-            :entries="$encyclopediaTree"
-            :current-entry="$entry ?? null" />
+            :entries="$encyclopediaTree" />
 
     </aside>
     @if(request()->routeIs('encyclopedia.*'))
