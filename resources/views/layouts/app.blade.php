@@ -191,159 +191,159 @@
                 </div>
 
 
-                <div class="flex flex-col md:flex-row flex-wrap">
-                    {{-- Resources --}}
-                    <div class="flex-1">
 
-                        <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500">
-                            Resources
-                        </h3>
+                {{-- Resources --}}
+                <div class="flex-1">
 
-
-                        <ul class="mt-4 space-y-2 text-sm text-gray-400">
-
-                            <li>
-                                <a href="{{ route('articles.index') }}"
-                                    class="transition hover:text-white">
-                                    Articles
-                                </a>
-                            </li>
+                    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500">
+                        Resources
+                    </h3>
 
 
-                            <li>
-                                <a href="{{ route('encyclopedia.index') }}"
-                                    class="transition hover:text-white">
-                                    Encyclopedia
-                                </a>
-                            </li>
+                    <ul class="mt-4 space-y-2 text-sm text-gray-400">
+
+                        <li>
+                            <a href="{{ route('articles.index') }}"
+                                class="transition hover:text-white">
+                                Articles
+                            </a>
+                        </li>
 
 
-                            <li>
-                                <a href="{{ route('topics.index') }}"
-                                    class="transition hover:text-white">
-                                    Topics
-                                </a>
-                            </li>
+                        <li>
+                            <a href="{{ route('encyclopedia.index') }}"
+                                class="transition hover:text-white">
+                                Encyclopedia
+                            </a>
+                        </li>
 
 
-                            <li>
-                                <a href="{{ route('search') }}"
-                                    class="transition hover:text-white">
-                                    Search
-                                </a>
-                            </li>
-
-                        </ul>
-
-                    </div>
+                        <li>
+                            <a href="{{ route('topics.index') }}"
+                                class="transition hover:text-white">
+                                Topics
+                            </a>
+                        </li>
 
 
+                        <li>
+                            <a href="{{ route('search') }}"
+                                class="transition hover:text-white">
+                                Search
+                            </a>
+                        </li>
 
-                    {{-- Encyclopedia --}}
-                    <div class="flex-1">
-
-                        <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500">
-                            Encyclopedia
-                        </h3>
-
-
-                        <ul class="mt-4 space-y-2 text-sm text-gray-400">
-
-                            @foreach($footerEntries ?? [] as $entry)
-
-                            <li>
-                                <a href="{{ route('encyclopedia.show', $entry) }}"
-                                    class="transition hover:text-white">
-
-                                    {{ $entry->title }}
-
-                                </a>
-                            </li>
-
-                            @endforeach
-
-
-                            <li class="pt-2">
-
-                                <a href="{{ route('encyclopedia.index') }}"
-                                    class="
-                                inline-flex
-                                items-center
-                                text-indigo-400
-                                transition
-                                hover:text-indigo-300
-                            ">
-
-                                    Browse all entries
-                                    <span class="ml-1">→</span>
-
-                                </a>
-
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-
-
-                    {{-- Topics --}}
-                    <div class="flex-1">
-
-                        <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500">
-                            Topics
-                        </h3>
-
-
-                        <ul class="mt-4 space-y-2 text-sm text-gray-400">
-
-                            @foreach($footerTopics ?? [] as $topic)
-
-                            <li>
-
-                                <a href="{{ route('topics.show', $topic) }}"
-                                    class="transition hover:text-white">
-
-                                    {{ $topic->name }}
-
-                                </a>
-
-                            </li>
-
-                            @endforeach
-
-
-                            <li class="pt-2">
-
-                                <a href="{{ route('topics.index') }}"
-                                    class="
-                                inline-flex
-                                items-center
-                                text-indigo-400
-                                transition
-                                hover:text-indigo-300
-                            ">
-
-                                    View all topics
-                                    <span class="ml-1">→</span>
-
-                                </a>
-
-                            </li>
-
-                        </ul>
-
-                    </div>
+                    </ul>
 
                 </div>
 
 
+
+                {{-- Encyclopedia --}}
+                <div class="flex-1">
+
+                    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500">
+                        Encyclopedia
+                    </h3>
+
+
+                    <ul class="mt-4 space-y-2 text-sm text-gray-400">
+
+                        @foreach($footerEntries ?? [] as $entry)
+
+                        <li>
+                            <a href="{{ route('encyclopedia.show', $entry) }}"
+                                class="transition hover:text-white">
+
+                                {{ $entry->title }}
+
+                            </a>
+                        </li>
+
+                        @endforeach
+
+
+                        <li class="pt-2">
+
+                            <a href="{{ route('encyclopedia.index') }}"
+                                class="
+                                inline-flex
+                                items-center
+                                text-indigo-400
+                                transition
+                                hover:text-indigo-300
+                            ">
+
+                                Browse all entries
+                                <span class="ml-1">→</span>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                {{-- Topics --}}
+                <div class="flex-1">
+
+                    <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500">
+                        Topics
+                    </h3>
+
+
+                    <ul class="mt-4 space-y-2 text-sm text-gray-400">
+
+                        @foreach($footerTopics ?? [] as $topic)
+
+                        <li>
+
+                            <a href="{{ route('topics.show', $topic) }}"
+                                class="transition hover:text-white">
+
+                                {{ $topic->name }}
+
+                            </a>
+
+                        </li>
+
+                        @endforeach
+
+
+                        <li class="pt-2">
+
+                            <a href="{{ route('topics.index') }}"
+                                class="
+                                inline-flex
+                                items-center
+                                text-indigo-400
+                                transition
+                                hover:text-indigo-300
+                            ">
+
+                                View all topics
+                                <span class="ml-1">→</span>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
             </div>
 
 
+        </div>
 
-            {{-- Bottom --}}
-            <div class="
+
+
+        {{-- Bottom --}}
+        <div class="
             mt-10
             border-t
             border-gray-800
@@ -356,18 +356,18 @@
             md:flex-row
             md:items-center
             md:justify-between
+            max-w-5xl mx-auto p-6
         ">
 
-                <p>
-                    © {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
-                </p>
+            <p>
+                © {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+            </p>
 
 
-                <p class="font-mono text-gray-600">
-                    built with curiosity & automation
-                </p>
+            <p class="font-mono text-gray-600">
+                built with curiosity & automation
+            </p>
 
-            </div>
 
 
         </div>
