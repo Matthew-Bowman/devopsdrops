@@ -103,7 +103,7 @@
                         class="{{ request()->is('topics*') ? 'text-white' : 'text-gray-300' }} rounded-md px-3 py-2 hover:bg-gray-800 hover:text-white transition">
                         Topics
                     </a>
-                    
+
                     <a href="{{ route('encyclopedia.index') }}"
                         class="{{ request()->is('topics*') ? 'text-white' : 'text-gray-300' }} rounded-md px-3 py-2 hover:bg-gray-800 hover:text-white transition">
                         Encyclopedia
@@ -151,61 +151,84 @@
 
 
     <footer class="border-t border-gray-800 bg-gray-950">
+
         <div class="max-w-5xl mx-auto p-6">
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-5">
 
-                <!-- Brand -->
-                <div class="md:col-span-2 mb-4">
+
+                {{-- Brand --}}
+                <div class="md:col-span-2">
 
                     <a href="{{ route('home') }}"
-                        class="text-2xl font-bold text-white tracking-tight">
+                        class="text-2xl font-bold tracking-tight text-white">
                         {{ config('app.name') }}
                     </a>
 
-                    <p class="mt-2 max-w-md text-sm leading-6 text-gray-400">
-                        Engineering-focused guides covering DevOps, Linux,
-                        cloud infrastructure, networking, automation,
-                        and modern software delivery practices.
+
+                    <p class="mt-3 max-w-md text-sm leading-6 text-gray-400">
+                        Engineering-focused resources covering DevOps,
+                        Linux, cloud infrastructure, networking,
+                        automation, and modern software delivery practices.
                     </p>
+
+
+                    <a href="{{ route('encyclopedia.index') }}"
+                        class="
+                        mt-5
+                        inline-flex
+                        items-center
+                        text-sm
+                        font-medium
+                        text-indigo-400
+                        transition
+                        hover:text-indigo-300
+                    ">
+                        Explore Encyclopedia
+                        <span class="ml-1">→</span>
+                    </a>
 
                 </div>
 
 
-                <div class="flex flex-row flex-wrap gap-6 mb-4">
-                    <!-- Navigation -->
-                    <div>
+                <div class="flex flex-col md:flex-row flex-wrap">
+                    {{-- Resources --}}
+                    <div class="flex-1">
 
-                        <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-300">
+                        <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500">
                             Resources
                         </h3>
 
-                        <ul class="mt-1 space-y-3 text-sm text-gray-400">
+
+                        <ul class="mt-4 space-y-2 text-sm text-gray-400">
 
                             <li>
                                 <a href="{{ route('articles.index') }}"
-                                    class="hover:text-white transition">
+                                    class="transition hover:text-white">
                                     Articles
                                 </a>
                             </li>
-                            
+
+
                             <li>
                                 <a href="{{ route('encyclopedia.index') }}"
-                                    class="hover:text-white transition">
+                                    class="transition hover:text-white">
                                     Encyclopedia
                                 </a>
                             </li>
 
+
                             <li>
                                 <a href="{{ route('topics.index') }}"
-                                    class="hover:text-white transition">
+                                    class="transition hover:text-white">
                                     Topics
                                 </a>
                             </li>
 
+
                             <li>
                                 <a href="{{ route('search') }}"
-                                    class="hover:text-white transition">
+                                    class="transition hover:text-white">
                                     Search
                                 </a>
                             </li>
@@ -215,33 +238,100 @@
                     </div>
 
 
-                    <!-- Topics -->
-                    <div>
 
-                        <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-300">
-                            Explore Topics
+                    {{-- Encyclopedia --}}
+                    <div class="flex-1">
+
+                        <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500">
+                            Encyclopedia
                         </h3>
 
-                        <div>
 
-                            @foreach($footerTopics ?? [] as $topic)
+                        <ul class="mt-4 space-y-2 text-sm text-gray-400">
 
-                            <a href="{{ route('topics.show', $topic) }}"
-                                class="block text-sm text-gray-400 transition hover:text-white">
+                            @foreach($footerEntries ?? [] as $entry)
 
-                                {{ $topic->name }}
+                            <li>
+                                <a href="{{ route('encyclopedia.show', $entry) }}"
+                                    class="transition hover:text-white">
 
-                            </a>
+                                    {{ $entry->title }}
+
+                                </a>
+                            </li>
 
                             @endforeach
 
-                        </div>
 
-                        <a href="{{ route('topics.index') }}"
-                            class="inline-flex items-center text-sm text-blue-400 hover:text-blue-300 transition">
-                            View all topics
-                            <span class="ml-1">→</span>
-                        </a>
+                            <li class="pt-2">
+
+                                <a href="{{ route('encyclopedia.index') }}"
+                                    class="
+                                inline-flex
+                                items-center
+                                text-indigo-400
+                                transition
+                                hover:text-indigo-300
+                            ">
+
+                                    Browse all entries
+                                    <span class="ml-1">→</span>
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                    {{-- Topics --}}
+                    <div class="flex-1">
+
+                        <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-500">
+                            Topics
+                        </h3>
+
+
+                        <ul class="mt-4 space-y-2 text-sm text-gray-400">
+
+                            @foreach($footerTopics ?? [] as $topic)
+
+                            <li>
+
+                                <a href="{{ route('topics.show', $topic) }}"
+                                    class="transition hover:text-white">
+
+                                    {{ $topic->name }}
+
+                                </a>
+
+                            </li>
+
+                            @endforeach
+
+
+                            <li class="pt-2">
+
+                                <a href="{{ route('topics.index') }}"
+                                    class="
+                                inline-flex
+                                items-center
+                                text-indigo-400
+                                transition
+                                hover:text-indigo-300
+                            ">
+
+                                    View all topics
+                                    <span class="ml-1">→</span>
+
+                                </a>
+
+                            </li>
+
+                        </ul>
 
                     </div>
 
@@ -251,19 +341,34 @@
             </div>
 
 
-            <!-- Bottom -->
-            <div class="mt-12 border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
 
-                <p class="text-sm mt-2 text-gray-500">
+            {{-- Bottom --}}
+            <div class="
+            mt-10
+            border-t
+            border-gray-800
+            py-4
+            flex
+            flex-col
+            gap-3
+            text-sm
+            text-gray-500
+            md:flex-row
+            md:items-center
+            md:justify-between
+        ">
+
+                <p>
                     © {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
                 </p>
 
 
-                <p class="text-sm text-gray-600 font-mono">
+                <p class="font-mono text-gray-600">
                     built with curiosity & automation
                 </p>
 
             </div>
+
 
         </div>
 
