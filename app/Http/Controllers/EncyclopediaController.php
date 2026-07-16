@@ -81,8 +81,37 @@ class EncyclopediaController extends Controller
             'topic',
             'entryType',
             'tags',
-            'relatedEntries'
+            'relatedEntries',
+            'parent',
         ]);
+
+        $breadcrumbs = [
+            [
+                'label' => 'Home',
+                'url' => route('home')
+            ],
+            [
+                'label' => 'Encyclopedia',
+                'url' => route('encyclopedia.index')
+            ],
+        ];
+
+
+        foreach ($entry->ancestors() as $ancestor) {
+
+            $breadcrumbs[] = [
+                'label' => $ancestor->title,
+                'url' => route(
+                    'encyclopedia.show',
+                    $ancestor
+                )
+            ];
+        }
+
+
+        $breadcrumbs[] = [
+            'label' => $entry->title
+        ];
 
 
         $relatedEntries = $entry->relatedEntries
@@ -93,7 +122,8 @@ class EncyclopediaController extends Controller
             'encyclopedia.show',
             compact(
                 'entry',
-                'relatedEntries'
+                'relatedEntries',
+                'breadcrumbs',
             )
         );
     }

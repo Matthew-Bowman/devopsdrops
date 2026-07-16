@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Entries\Schemas;
 
+use App\Models\Entry;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -20,6 +21,17 @@ class EntryForm
                     ->required(),
                 TextInput::make('slug')
                     ->required(),
+                Select::make('parent_entry_id')
+                    ->label('Parent Entry')
+                    ->options(function ($record) {
+
+                        return Entry::query()
+                            ->where('id', '!=', $record?->id)
+                            ->pluck('title', 'id');
+                    })
+                    ->searchable()
+                    ->preload()
+                    ->nullable(),
                 Textarea::make('excerpt')
                     ->default(null)
                     ->columnSpanFull(),

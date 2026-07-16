@@ -44,4 +44,35 @@ class Entry extends Model
             'related_entry_id'
         );
     }
+
+    public function ancestors()
+    {
+        $ancestors = collect();
+
+        $entry = $this->parent;
+
+        while ($entry) {
+            $ancestors->prepend($entry);
+            $entry = $entry->parent;
+        }
+
+        return $ancestors;
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(
+            Entry::class,
+            'parent_entry_id'
+        );
+    }
+
+
+    public function children()
+    {
+        return $this->hasMany(
+            Entry::class,
+            'parent_entry_id'
+        );
+    }
 }

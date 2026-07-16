@@ -79,25 +79,7 @@
 
     @section('breadcrumbs')
 
-    <x-breadcrumbs :items="[
-    [
-        'label' => 'Home',
-        'url' => route('home')
-    ],
-    [
-        'label' => 'Encyclopedia',
-        'url' => route('encyclopedia.index')
-    ],
-    [
-        'label' => optional($entry->topic)->name,
-        'url' => $entry->topic
-            ? route('encyclopedia.topic.show', $entry->topic)
-            : null
-    ],
-    [
-        'label' => $entry->title
-    ]
-]" />
+    <x-breadcrumbs :items="$breadcrumbs" />
 
     @endsection
 
