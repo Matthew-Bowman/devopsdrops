@@ -12,8 +12,9 @@ class Entry extends Model
         'excerpt',
         'content',
         'entry_type_id',
+        'parent_entry_id',
         'topic_id',
-        'published',
+        'published_at',
     ];
 
 
