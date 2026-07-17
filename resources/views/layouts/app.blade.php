@@ -463,9 +463,9 @@
 
         </div>
 
-
         <x-encyclopedia-tree
-            :entries="$encyclopediaTree" />
+            :entries="$encyclopediaTree"
+            :activePath="$activePath" />
 
     </aside>
     @if(request()->routeIs('encyclopedia.*'))

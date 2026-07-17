@@ -114,7 +114,7 @@ class EncyclopediaController extends Controller
 
 
         $exploreEntries = $entry->exploreEntries();
-        
+
         return view(
             'encyclopedia.show',
             compact(

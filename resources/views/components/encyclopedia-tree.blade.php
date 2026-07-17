@@ -2,8 +2,12 @@
 
     @foreach($entries as $entry)
 
+    @php
+    $isActive = isset($activePath) && $activePath->contains($entry->id);
+    @endphp
+
     <li
-        x-data="{ open: {{ request()->is('encyclopedia/'.$entry->slug.'*') || $entry->childrenRecursive->contains('slug', request()->segment(2)) ? 'true' : 'false' }} }">
+        x-data="{ open: {{ $isActive ? 'true' : 'false' }} }">
 
         <div class="flex items-center gap-2">
 
@@ -44,7 +48,7 @@
                     transition
                     hover:text-white
 
-                    {{ request()->is('encyclopedia/'.$entry->slug)
+                    {{ $isActive
                         ? 'text-indigo-400 font-semibold'
                         : 'text-gray-400'
                     }}
@@ -63,10 +67,11 @@
             x-cloak
             x-show="open"
             x-collapse.duration.300ms
-            class="ml-5 mt-1 border-l border-gray-800 pl-3">
+            class="ml-5 mt-1 border-l {{ $isActive ? 'border-indigo-500' : 'border-gray-800' }} pl-3">
 
             <x-encyclopedia-tree
-                :entries="$entry->childrenRecursive" />
+                :entries="$entry->childrenRecursive"
+                :activePath="$activePath" />
 
         </div>
 

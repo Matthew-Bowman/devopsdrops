@@ -14,6 +14,21 @@ class ViewServiceProvider extends ServiceProvider
     {
         View::composer('layouts.app', function ($view) {
 
+            $currentSlug = request()->segment(2);
+
+            $currentEntry = null;
+            $activePath = collect();
+
+            if ($currentSlug) {
+                $currentEntry = Entry::where('slug', $currentSlug)->first();
+
+                if ($currentEntry) {
+                    $activePath = $currentEntry->ancestors()
+                        ->pluck('id')
+                        ->push($currentEntry->id);
+                }
+            }
+
             $view->with([
 
                 'footerTopics' => Topic::withCount([
@@ -38,6 +53,8 @@ class ViewServiceProvider extends ServiceProvider
                     ->with('childrenRecursive')
                     ->orderBy('title')
                     ->get(),
+
+                'activePath' => $activePath,
 
             ]);
         });
