@@ -133,13 +133,9 @@
 
     <div class="flex flex-wrap gap-2 mb-8">
 
-        @foreach($entry->tags as $tag)
-
         <x-tag>
-            {{ $tag->name }}
+            {{ $entry->entryType->name }}
         </x-tag>
-
-        @endforeach
 
     </div>
 

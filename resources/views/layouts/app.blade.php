@@ -463,8 +463,8 @@
 
         </div>
 
-        <x-encyclopedia-tree
-            :entries="$encyclopediaTree"
+        <x-encyclopedia-topic-tree
+            :topics="$encyclopediaTree"
             :activePath="$activePath" />
 
     </aside>

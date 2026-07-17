@@ -47,11 +47,20 @@ class ViewServiceProvider extends ServiceProvider
                     ->limit(8)
                     ->get(),
 
-                'encyclopediaTree' => Entry::query()
-                    ->whereNull('parent_entry_id')
-                    ->where('published', true)
-                    ->with('childrenRecursive')
-                    ->orderBy('title')
+                'encyclopediaTree' => Topic::query()
+                    ->where('is_published', true)
+                    ->whereHas('entries', function ($query) {
+                        $query->where('published', true);
+                    })
+                    ->with([
+                        'entries' => function ($query) {
+                            $query->whereNull('parent_entry_id')
+                                ->where('published', true)
+                                ->orderBy('title')
+                                ->with('childrenRecursive');
+                        }
+                    ])
+                    ->orderBy('name')
                     ->get(),
 
                 'activePath' => $activePath,
