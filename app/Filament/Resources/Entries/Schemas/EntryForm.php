@@ -9,6 +9,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class EntryForm
@@ -32,11 +33,20 @@ class EntryForm
                     ->searchable()
                     ->preload()
                     ->nullable(),
+                TextInput::make('sort_order')
+                    ->numeric()
+                    ->default(0),
                 Textarea::make('excerpt')
                     ->default(null)
                     ->columnSpanFull(),
-                RichEditor::make('content')
-                    ->required()
+                Section::make('Content')
+                    ->schema([
+                        RichEditor::make('content')
+                            ->required()
+                            ->columnSpanFull(),
+                    ])
+                    ->collapsible()
+                    ->collapsed()
                     ->columnSpanFull(),
                 Select::make('topic_id')
                     ->label('Topic')

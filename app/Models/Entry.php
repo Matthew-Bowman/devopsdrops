@@ -19,6 +19,7 @@ class Entry extends Model
         'topic_id',
         'published_at',
         'published',
+        'sort_order',
     ];
 
 
@@ -107,7 +108,9 @@ class Entry extends Model
         return $this->hasMany(
             Entry::class,
             'parent_entry_id'
-        );
+        )
+            ->orderBy('sort_order')
+            ->orderBy('title');
     }
 
     protected $casts = [

@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Entries;
 use App\Filament\Resources\Entries\Pages\CreateEntry;
 use App\Filament\Resources\Entries\Pages\EditEntry;
 use App\Filament\Resources\Entries\Pages\ListEntries;
+use App\Filament\Resources\Entries\RelationManagers\ChildrenRelationManager;
 use App\Filament\Resources\Entries\Schemas\EntryForm;
 use App\Filament\Resources\Entries\Tables\EntriesTable;
 use App\Models\Entry;
@@ -35,7 +36,7 @@ class EntryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ChildrenRelationManager::class,
         ];
     }
 
