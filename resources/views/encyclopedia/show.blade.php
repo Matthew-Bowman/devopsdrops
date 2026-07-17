@@ -120,7 +120,6 @@
         {{ $entry->excerpt }}
     </p>
 
-
     <p class="text-gray-400 mb-8">
         @if($entry->published_at)
         Published {{ $entry->published_at->format('d M Y') }}
@@ -148,6 +147,245 @@
     <div class="entry-content max-w-none">
         {!! $entry->content !!}
     </div>
+
+    @if($subtopics->count())
+
+    <section class="mt-12">
+
+        <div class="flex items-center justify-between mb-6">
+
+            <div>
+                <h2 class="text-3xl font-bold">
+                    Subtopics
+                </h2>
+
+                <p class="text-gray-400">
+                    Explore concepts within {{ $entry->title }}.
+                </p>
+            </div>
+
+            @if($hasMoreSubtopics)
+
+            <a href="{{ route('encyclopedia.subtopics', $entry) }}"
+                class="
+                text-indigo-400
+                hover:text-indigo-300
+                transition
+            ">
+                View all {{ $entry->children()->count() }} →
+            </a>
+
+            @endif
+
+        </div>
+
+
+        @if($entry->children()->count() <= 6)
+
+            <div class="grid md:grid-cols-3 gap-6">
+
+            @foreach($subtopics as $child)
+
+            <a href="{{ route('encyclopedia.show', $child) }}"
+                class="
+                    group
+                    flex
+                    flex-col
+                    rounded-xl
+                    border
+                    border-gray-800
+                    bg-gray-900
+                    p-6
+                    transition
+                    hover:border-indigo-500/50
+                    hover:-translate-y-1
+                ">
+
+                <h3 class="
+                    text-xl
+                    font-semibold
+                    mb-3
+                    group-hover:text-indigo-400
+                    transition
+                ">
+                    {{ $child->title }}
+                </h3>
+
+
+                @if($child->excerpt)
+
+                <p class="
+                    text-gray-400
+                    leading-relaxed
+                ">
+                    {{ Str::limit($child->excerpt, 120) }}
+                </p>
+
+                @endif
+
+
+            </a>
+
+            @endforeach
+
+            </div>
+
+
+            @else
+
+
+            <div class="
+            divide-y
+            divide-gray-800
+            rounded-xl
+            border
+            border-gray-800
+            bg-gray-900
+        ">
+
+                @foreach($subtopics as $child)
+
+                <a href="{{ route('encyclopedia.show', $child) }}"
+                    class="
+                    group
+                    flex
+                    items-center
+                    justify-between
+                    p-5
+                    transition
+                    hover:bg-gray-800/50
+                ">
+
+                    <div>
+
+                        <h3 class="
+                        font-semibold
+                        text-lg
+                        group-hover:text-indigo-400
+                        transition
+                    ">
+                            {{ $child->title }}
+                        </h3>
+
+                        @if($child->excerpt)
+
+                        <p class="
+                        text-sm
+                        text-gray-400
+                        mt-1
+                    ">
+                            {{ Str::limit($child->excerpt, 100) }}
+                        </p>
+
+                        @endif
+
+                    </div>
+
+
+                    <span class="
+                    text-indigo-400
+                    text-xl
+                    transition
+                    group-hover:translate-x-1
+                ">
+                        →
+                    </span>
+
+                </a>
+
+                @endforeach
+
+            </div>
+
+
+            @endif
+
+
+    </section>
+
+    @endif
+
+    @if($previousEntry || $nextEntry)
+
+    <section class="mt-16 border-t border-gray-800 pt-8">
+
+        <div class="grid md:grid-cols-2 gap-4">
+
+            @if($previousEntry)
+
+            <a href="{{ route('encyclopedia.show', $previousEntry) }}"
+                class="
+                group
+                rounded-xl
+                border
+                border-gray-800
+                bg-gray-900
+                p-6
+                transition
+                hover:border-indigo-500/50
+            ">
+
+                <div class="text-sm text-gray-500 mb-2">
+                    ← Previous Entry
+                </div>
+
+                <div class="
+                text-lg
+                font-semibold
+                text-white
+                group-hover:text-indigo-400
+                transition
+            ">
+                    {{ $previousEntry->title }}
+                </div>
+
+            </a>
+
+            @else
+
+            <div></div>
+
+            @endif
+
+
+            @if($nextEntry)
+
+            <a href="{{ route('encyclopedia.show', $nextEntry) }}"
+                class="
+                group
+                rounded-xl
+                border
+                border-gray-800
+                bg-gray-900
+                p-6
+                text-right
+                transition
+                hover:border-indigo-500/50
+            ">
+
+                <div class="text-sm text-gray-500 mb-2">
+                    Next Entry →
+                </div>
+
+                <div class="
+                text-lg
+                font-semibold
+                text-white
+                group-hover:text-indigo-400
+                transition
+            ">
+                    {{ $nextEntry->title }}
+                </div>
+
+            </a>
+
+            @endif
+
+        </div>
+
+    </section>
+
+    @endif
 
 
     @if($exploreEntries->count())

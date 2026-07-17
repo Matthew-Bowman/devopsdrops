@@ -51,6 +51,9 @@ Route::get('/encyclopedia', [EncyclopediaController::class, 'index'])
 Route::get('/encyclopedia/topics/{topic:slug}', [EncyclopediaController::class, 'topic'])
     ->name('encyclopedia.topic.show');
 
+Route::get('/encyclopedia/{entry:slug}/subtopics', [EncyclopediaController::class, 'subtopics'])
+    ->name('encyclopedia.subtopics');
+
 Route::get('/encyclopedia/{entry:slug}', [EncyclopediaController::class, 'show'])
     ->name('encyclopedia.show');
 

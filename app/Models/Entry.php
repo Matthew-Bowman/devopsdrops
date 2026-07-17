@@ -51,30 +51,31 @@ class Entry extends Model
     {
         $entries = collect();
 
-        // Parent
-        if ($this->parent) {
-            $entries->push($this->parent);
-        }
+        // Children first
+        $entries = $entries->merge(
+            $this->children()
+                ->where('published', true)
+                ->orderBy('sort_order')
+                ->limit(3)
+                ->get()
+        );
 
-        // Children
-        if ($entries->count() < 3) {
-            $entries = $entries->merge(
-                $this->children()
-                    ->where('published', true)
-                    ->limit(3 - $entries->count())
-                    ->get()
-            );
-        }
-
-        // Siblings
+        // Next siblings
         if ($entries->count() < 3 && $this->parent_entry_id) {
             $entries = $entries->merge(
                 Entry::where('parent_entry_id', $this->parent_entry_id)
                     ->where('id', '!=', $this->id)
+                    ->where('sort_order', '>', $this->sort_order)
                     ->where('published', true)
+                    ->orderBy('sort_order')
                     ->limit(3 - $entries->count())
                     ->get()
             );
+        }
+
+        // Parent as final fallback
+        if ($entries->count() < 3 && $this->parent) {
+            $entries->push($this->parent);
         }
 
         return $entries;

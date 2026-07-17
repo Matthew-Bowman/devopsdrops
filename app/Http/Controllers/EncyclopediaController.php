@@ -53,6 +53,7 @@ class EncyclopediaController extends Controller
         $entries = Entry::with([
             'entryType'
         ])
+            ->whereNull('parent_entry_id')
             ->where('topic_id', $topic->id)
             ->where('published', true)
             ->orderBy('title')
@@ -115,13 +116,58 @@ class EncyclopediaController extends Controller
 
         $exploreEntries = $entry->exploreEntries();
 
+        $previousEntry = null;
+        $nextEntry = null;
+
+        if ($entry->parent_entry_id) {
+
+            $previousEntry = Entry::where('parent_entry_id', $entry->parent_entry_id)
+                ->where('published', true)
+                ->where('sort_order', '<', $entry->sort_order)
+                ->orderByDesc('sort_order')
+                ->first();
+
+            $nextEntry = Entry::where('parent_entry_id', $entry->parent_entry_id)
+                ->where('published', true)
+                ->where('sort_order', '>', $entry->sort_order)
+                ->orderBy('sort_order')
+                ->first();
+        }
+
+        $subtopics = $entry->children()
+            ->where('published', true)
+            ->orderBy('sort_order')
+            ->limit(6)
+            ->get();
+
+        $hasMoreSubtopics = $entry->children()
+            ->where('published', true)
+            ->count() > 6;
+
         return view(
             'encyclopedia.show',
             compact(
                 'entry',
                 'exploreEntries',
                 'breadcrumbs',
+                'previousEntry',
+                'nextEntry',
+                'subtopics',
+                'hasMoreSubtopics',
             )
         );
+    }
+
+    public function subtopics(Entry $entry)
+    {
+        $subtopics = $entry->children()
+            ->where('published', true)
+            ->orderBy('sort_order')
+            ->paginate(24);
+
+        return view('encyclopedia.subtopics', [
+            'entry' => $entry,
+            'subtopics' => $subtopics,
+        ]);
     }
 }
