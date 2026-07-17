@@ -8,7 +8,7 @@ A collection of potential features, improvements, and ideas for this project.
 - [ ] Add table of contents (Perhaps floating absolutely to follow the user down?)
 - [ ] Add estimated reading progress bar (Could be alongside the table of contents idea?)
 - [ ] Add previous / next article navigation
-- [ ] Add related articles based on tags
+- [X] Add related articles based on tags
 - [ ] Add share buttons (copy link, X, LinkedIn, etc.)
 
 ## Content Improvements

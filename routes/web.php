@@ -7,6 +7,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\EncyclopediaController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\CheatsheetController;
 
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
@@ -14,12 +15,10 @@ use Spatie\Sitemap\Tags\Url;
 use App\Models\Article;
 use App\Models\Entry;
 use App\Models\Topic;
+use App\Models\Media;
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
+// Landing Page
 Route::get('/', [HomeController::class, 'index'])
     ->name('home');
 
@@ -55,6 +54,24 @@ Route::get('/encyclopedia/topics/{topic:slug}', [EncyclopediaController::class, 
 Route::get('/encyclopedia/{entry:slug}', [EncyclopediaController::class, 'show'])
     ->name('encyclopedia.show');
 
+// Cheatsheets
+Route::get(
+    '/cheatsheets',
+    [CheatsheetController::class, 'index']
+)->name('cheatsheets.index');
+
+
+Route::get(
+    '/cheatsheets/{topic}',
+    [CheatsheetController::class, 'show']
+)->name('cheatsheets.show');
+
+
+Route::get(
+    '/cheatsheets/{topic}/{slug}',
+    [CheatsheetController::class, 'view']
+)->name('cheatsheets.view');
+
 // Sitemap
 Route::get('/sitemap.xml', function () {
 
@@ -81,6 +98,9 @@ Route::get('/sitemap.xml', function () {
         )
         ->add(
             Url::create('/topics')
+                ->setLastModificationDate(now())
+        )->add(
+            Url::create('/cheatsheets')
                 ->setLastModificationDate(now())
         );
 
@@ -171,6 +191,75 @@ Route::get('/sitemap.xml', function () {
                 )
                     ->setLastModificationDate(
                         $entry->updated_at
+                    )
+            );
+        });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cheatsheet Topics
+    |--------------------------------------------------------------------------
+    */
+
+    Media::whereJsonContains('tags', 'type:cheatsheet')
+        ->get()
+        ->pluck('tags')
+        ->flatten()
+        ->filter(fn($tag) => str_starts_with($tag, 'topic:'))
+        ->map(fn($tag) => str_replace('topic:', '', $tag))
+        ->unique()
+        ->each(function ($topic) use ($sitemap) {
+
+            $sitemap->add(
+                Url::create(
+                    route(
+                        'cheatsheets.show',
+                        $topic
+                    )
+                )
+            );
+        });
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cheatsheets
+    |--------------------------------------------------------------------------
+    */
+
+    Media::whereJsonContains('tags', 'type:cheatsheet')
+        ->each(function ($cheatsheet) use ($sitemap) {
+
+            $topic = collect($cheatsheet->tags)
+                ->first(fn($tag) => str_starts_with($tag, 'topic:'));
+
+            $slug = collect($cheatsheet->tags)
+                ->first(fn($tag) => str_starts_with($tag, 'slug:'));
+
+
+            if (!$topic || !$slug) {
+                return;
+            }
+
+
+            $topic = str_replace('topic:', '', $topic);
+
+            $slug = str_replace('slug:', '', $slug);
+
+
+            $sitemap->add(
+                Url::create(
+                    route(
+                        'cheatsheets.view',
+                        [
+                            'topic' => $topic,
+                            'slug' => $slug
+                        ]
+                    )
+                )
+                    ->setLastModificationDate(
+                        $cheatsheet->updated_at
                     )
             );
         });

@@ -67,13 +67,20 @@
                     </a>
 
 
+                    <a href="{{ route('cheatsheets.index') }}"
+                        class="{{ request()->is('cheatsheets*') ? 'text-white' : 'text-gray-300' }} hover:text-white transition">
+                        Cheatsheets
+                    </a>
+
+
                     <a href="{{ route('topics.index') }}"
                         class="{{ request()->is('topics*') ? 'text-white' : 'text-gray-300' }} hover:text-white transition">
                         Topics
                     </a>
 
+
                     <a href="{{ route('encyclopedia.index') }}"
-                        class="{{ request()->is('topics*') ? 'text-white' : 'text-gray-300' }} hover:text-white transition">
+                        class="{{ request()->is('encyclopedia*') ? 'text-white' : 'text-gray-300' }} hover:text-white transition">
                         Encyclopedia
                     </a>
 
@@ -109,6 +116,11 @@
                     <a href="{{ route('articles.index') }}"
                         class="{{ request()->is('articles*') ? 'text-white' : 'text-gray-300' }} rounded-md px-3 py-2 hover:bg-gray-800 hover:text-white transition">
                         Articles
+                    </a>
+
+                    <a href="{{ route('cheatsheets.index') }}"
+                        class="{{ request()->is('cheatsheets*') ? 'text-white' : 'text-gray-300' }} rounded-md px-3 py-2 hover:bg-gray-800 hover:text-white transition">
+                        Cheatsheets
                     </a>
 
                     <a href="{{ route('topics.index') }}"
@@ -221,6 +233,12 @@
                             </a>
                         </li>
 
+                        <li>
+                            <a href="{{ route('cheatsheets.index') }}"
+                                class="transition hover:text-white">
+                                Cheatsheets
+                            </a>
+                        </li>
 
                         <li>
                             <a href="{{ route('encyclopedia.index') }}"
